@@ -11,4 +11,17 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
+
+Route::domain('www.novel.local')->namespace('www')->group(function(){
+   
+    Route::get('/', 'HomeController@index');
+    
+    Route::get('categories/{idcode}', 'CategoryController@index')
+    ->name('category');
+    
+    
+    Route::get('books/{idcode}', 'BookController@index');
+    
+    Route::get('articles/{idcode}', 'ArticleController@index');
+    
+});
