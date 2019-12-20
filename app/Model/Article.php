@@ -13,22 +13,29 @@ class Article extends Model
     
     
     
-    public static function ls($limit = 20, $offset = 0)
+    public function ls($bookId = null, array $order = [],  $limit = 20, $offset = 0)
     {
         $where = [];
         $where['articles.is_del'] = false;
-        $order = ['articles.id', 'desc'];
-        $list = self::where($where)
+        
+        is_id($bookId) && $where['articles.book_id'] = $bookId;
+        
+        $order = $order ?: $order = ['articles.sort_weight', 'desc'];
+        
+        $list = $this->where($where)
         ->select(
-            'books.id',
+            'books.id as book_id',
             'books.category',
+            'books.category_id',
             'books.author', 
             'books.name as book_name',
-            'articles.*'
+            'articles.id',
+            'articles.title',
+            'articles.content',
+            'articles.create_time'
         )
         ->join('books', function($join){
-            $join->on('articles.parent_flag', '=', 'books.relation_flag')
-            ->on('articles.origin_site', '=', 'books.origin_site');
+            $join->on('articles.book_id', '=', 'books.id');
         })
         ->orderBy($order[0], $order[1])
         ->limit( intval($limit) )
@@ -36,6 +43,17 @@ class Article extends Model
         ->get();
         
         return $list;
+    }
+    
+    public function one($id)
+    {
+        
+        $where = [];
+        $where['is_del'] = false;
+        $where['id'] = $id;
+        
+        return $this->where($where)
+        ->first();
     }
     
     

@@ -6,9 +6,9 @@
             <title>@yield('title')</title>
             <meta name="keywords" content="@yield('keywords')">
     		<meta name="description" content="@yield('description')">
-            <link rel="stylesheet" href="/static/www/css/common.css?v=4" type="text/css" />
+            <link rel="stylesheet" href="/static/www/css/common.css?v=3" type="text/css" />
             <script type="text/javascript" src="/common/home/js/jquery.js"></script>
-        	<script type="text/javascript" src="/static/www/css/common.js?v=4"></script>
+        	<script type="text/javascript" src="/static/www/css/common.js?v=3"></script>
         	<script type="text/javascript">
         		
         		$(function(){
@@ -48,7 +48,7 @@
     <!--index_top_h2开始-->
     <div class="index_top_h2">
         <div class="index_logo">
-                <a href="#"><img src="/static/www/images/logo.gif" alt="小说网" title="小说网"/></a>
+                <a href="/"><img src="/static/www/images/logo.gif" alt="小说网" title="小说网"/></a>
             </div>
             <div class="index_search for_search_suggest">
             	<form action="#" method="get">
@@ -118,48 +118,13 @@
 		</div -->
 	<!-- 广告位 第一到第四个广告位-->
 	
-	<div class="both height10"></div>
-		<div class="index_class">
-			<div class="index_anniu">
-			    <span><b style="font-size:16px;">强力推荐</b></span>
-			    <span style="float:right;margin-right:15px;">
-			        <span style="float:left;margin-right:10px;"><span id="ry_page">1</span><span style="margin:0 3px;font-size:14px;color:#555">/</span>3</span>
-					<a class="btn-prev" href="javascript:void(0)" id="btn-prev"></a>
-					<a class="btn-next" href="javascript:void(0)" id="btn-next"></a>
-				</span>
-			</div>
-			
-			<div class="index_screening">
-				<ul style="left:-980px;">
-						<li>
-							<p><a href="#" target="_blank"><img src="222" width="150" height="180" alt="22" title="22" /></a></p>
-							<div><a href="#" target="_blank" title="111">111</a></div>
-							<p><span class="reting-star allstar4"></span><span style="color:#ff2f17;font-size:16px;font-weight:bold;">222</span></p>
-						</li>
-						<li>
-							<p><a href="#" target="_blank"><img src="222" width="150" height="180" alt="22" title="22" /></a></p>
-							<div><a href="#" target="_blank" title="111">111</a></div>
-							<p><span class="reting-star allstar4"></span><span style="color:#ff2f17;font-size:16px;font-weight:bold;">222</span></p>
-						</li>
-						<li>
-							<p><a href="#" target="_blank"><img src="222" width="150" height="180" alt="22" title="22" /></a></p>
-							<div><a href="#" target="_blank" title="111">111</a></div>
-							<p><span class="reting-star allstar4"></span><span style="color:#ff2f17;font-size:16px;font-weight:bold;">222</span></p>
-						</li>
-						<li>
-							<p><a href="#" target="_blank"><img src="222" width="150" height="180" alt="22" title="22" /></a></p>
-							<div><a href="#" target="_blank" title="111">111</a></div>
-							<p><span class="reting-star allstar4"></span><span style="color:#ff2f17;font-size:16px;font-weight:bold;">222</span></p>
-						</li>
-				</ul>
-			</div>
-		</div>
+		<div class="both height10"></div>
+		@yield('recommend')
         <div class="both height10"></div>
         @yield('content')
         
         @yield('newBookAndArticle')
         
-       
         <!--index_box1结束-->
         <div class="both height20"></div>
         <!-- 广告位 第6 7 位-->

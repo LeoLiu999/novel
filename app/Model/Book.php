@@ -8,13 +8,10 @@ class Book extends Model
 {
     //
     
-    
     CONST CREATED_AT = 'create_time';
     CONST UPDATED_AT = 'update_time';
     
-    
-    
-    public static function ls($categoryId = null, $isRecommend = null, $order = [], $limit = 6, $offset = 0)
+    public function ls($categoryId = null, $isRecommend = null, array $order = [], $limit = 6, $offset = 0)
     {
         $where = [
             'is_del' => false,
@@ -25,15 +22,22 @@ class Book extends Model
         Is_id($categoryId) && $where['category_id'] = $categoryId;
         $order = $order ?: ['sort_weight', 'desc'];
         
-        return  self::where($where)
+        return  $this->where($where)
         ->orderBy($order[0], $order[1])
         ->limit( intval($limit) )
         ->offset( intval($offset) )
         ->get();
-        
-        
-        
     }
     
+    public function one($id)
+    {
+        $where = [
+            'is_del' => false,
+            'id' => $id
+        ];
+        
+        return  $this->where($where)
+        ->first();
+    }
     
 }
