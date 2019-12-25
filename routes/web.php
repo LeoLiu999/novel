@@ -11,10 +11,9 @@
 |
 */
 
-
-Route::domain('www.novel.local')->namespace('www')->group(function(){
+Route::domain(env('WWW_SITE'))->namespace('www')->group(function(){
    
-    Route::get('/', 'HomeController@index');
+    Route::get('/', 'HomeController@index')->name('www');
     
     Route::get('categories/{idcode}', 'CategoryController@index')->name('category');
     
@@ -37,4 +36,7 @@ Route::domain('www.novel.local')->namespace('www')->group(function(){
     Route::fallback(function () {
         return response()->view('www/global/404', ['categories' => App\Model\Category::ls(true)], 404);
     });
+});
+Route::fallback(function () {
+    return response()->redirectTo(env('APP_URL'));
 });
