@@ -21,11 +21,26 @@ class CategoryService extends BaseService
             return makeResult('error_limit');
         }
         
-        $categories = $this->model->ls($isRecommend, $limit);
+        $categories = $this->model::ls($isRecommend, $limit);
         return makeResult('success', $categories);
         
     }
     
+    
+    public function one($idcode)
+    {
+        
+        $id = $idcode;
+        
+        if ( !is_id($id) ) {
+            return makeResult('error_id');
+        }
+        
+        $category = $this->model::one($id);
+        return makeResult('success', $category);
+        
+        
+    }
     
     
 }

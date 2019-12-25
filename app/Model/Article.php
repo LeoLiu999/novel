@@ -13,21 +13,22 @@ class Article extends Model
     
     
     
-    public function ls($bookId = null, array $order = [],  $limit = 20, $offset = 0)
+    public static function ls($categoryId = null, $bookId = null, array $order = [],  $limit = 20, $offset = 0)
     {
         $where = [];
         $where['articles.is_del'] = false;
         
         is_id($bookId) && $where['articles.book_id'] = $bookId;
+        is_id($categoryId) && $where['books.category_id'] = $categoryId;
         
         $order = $order ?: $order = ['articles.sort_weight', 'desc'];
         
-        $list = $this->where($where)
+        $list = self::where($where)
         ->select(
             'books.id as book_id',
             'books.category',
             'books.category_id',
-            'books.author', 
+            'books.author',
             'books.name as book_name',
             'articles.id',
             'articles.title',
@@ -45,15 +46,80 @@ class Article extends Model
         return $list;
     }
     
-    public function one($id)
+    public static function one($id)
     {
         
         $where = [];
-        $where['is_del'] = false;
-        $where['id'] = $id;
+        $where['articles.is_del'] = false;
+        $where['articles.id'] = $id;
         
-        return $this->where($where)
+        return self::where($where)
+        ->select(
+            'books.id as book_id',
+            'books.category',
+            'books.category_id',
+            'books.author',
+            'books.name as book_name',
+            'articles.id',
+            'articles.title',
+            'articles.content',
+            'articles.create_time'
+            )
+        ->join('books', function($join){
+            $join->on('articles.book_id', '=', 'books.id');
+        })
         ->first();
+    }
+    
+    
+    public static function nextOne($id, $bookId)
+    {
+        $where = [];
+        $where['articles.is_del'] = false;
+        $where[] = ['articles.id', '>', $id];
+        
+        return self::where($where)
+        ->select(
+            'books.id as book_id',
+            'books.category',
+            'books.category_id',
+            'books.author',
+            'books.name as book_name',
+            'articles.id',
+            'articles.title',
+            'articles.content',
+            'articles.create_time'
+            )
+        ->join('books', function($join){
+            $join->on('articles.book_id', '=', 'books.id');
+        })
+        ->first();
+        
+    }
+    
+    public static function prevOne($id, $bookId)
+    {
+        $where = [];
+        $where['articles.is_del'] = false;
+        $where[] = ['articles.id', '<', $id];
+        
+        return self::where($where)
+        ->select(
+            'books.id as book_id',
+            'books.category',
+            'books.category_id',
+            'books.author',
+            'books.name as book_name',
+            'articles.id',
+            'articles.title',
+            'articles.content',
+            'articles.create_time'
+            )
+        ->join('books', function($join){
+            $join->on('articles.book_id', '=', 'books.id');
+        })
+        ->first();
+            
     }
     
     

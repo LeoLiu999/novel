@@ -19,6 +19,7 @@ class HomeController extends Controller
         $categoriesRecommend = $categoryService->ls(true, 6);
         
         $booksByCategory = [];
+        
         if ( isset($categoriesRecommend['data']) && !$categoriesRecommend['data']->isEmpty() ) {
             
             
@@ -39,15 +40,19 @@ class HomeController extends Controller
         
         $categories = $categoryService->ls();
         
-        $booksNew = $bookService->ls(null, null, ['id', 'desc'], 20);
+        $booksNew = $bookService->lsNew();
         
-        $articlesNew = $articleService->ls();
+        $articlesNew = $articleService->lsNew();
+        
+        $randRecommendList = $bookService->lsRandRecommend();
         
         $data = [];
         $data['books_by_category'] = $booksByCategory;
         $data['categories'] = $categories['data'];
         $data['books_new'] = $booksNew['data'];
         $data['articles_new'] = $articlesNew['data'];
+        $data['books_recommend'] = $randRecommendList['data'];
+        $data['position'] = 'home';
         
         return view('www/home/index', $data);
         

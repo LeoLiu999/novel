@@ -11,7 +11,7 @@ class Category extends Model
     CONST UPDATED_AT = 'update_time';
     
     
-    public function ls($isRecommend = null, $limit = 100)
+    public static function ls($isRecommend = null, $limit = 100)
     {
         $where = [
             'is_del' => false,
@@ -22,6 +22,23 @@ class Category extends Model
                 ->orderBy('sort_weight', 'desc')
                 ->limit($limit)
                 ->get();
+    }
+    
+    
+    public static function one($id)
+    {
+        $where = [
+            'is_del' => false,
+            'id' => $id
+        ];
+        
+        return  self::where($where)
+        ->select(
+            'id',
+            'name'
+        )
+        ->first();
+        
     }
     
 }

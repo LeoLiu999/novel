@@ -4,9 +4,9 @@
 		<ul>
 			@foreach($books_new as $b_n)
     			<li>
-    				<a href="{{ route('category', ['idcode' => $b_n->category_id]) }}"><span class="width20">「{{ $b_n->category }}」</span></a>
-    				<a href="{{ route('book', ['idcode' => $b_n->id]) }} "><span class="width50">{{ $b_n->name }}</span>
-    				<span class="width20">{{ $b_n->author }}</span>
+    				<span class="width20"><a href="{{ route('category', ['idcode' => $b_n->category_id]) }}">「{{ $b_n->category }}」</a></span>
+    				<span class="width50"><a href="{{ route('book', ['idcode' => $b_n->id]) }} ">{{ $b_n->name }}</a></span>
+    				<span class="width20 color999">{{ $b_n->author }}</span>
     			</li>
 			@endforeach
 		</ul>

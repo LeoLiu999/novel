@@ -13,11 +13,11 @@ class ArticleService extends BaseService
         $this->model = $articleModel;
     }
     
-    public function ls($bookIdcode = null, array $order = [],  $limit = 20, $offset = 0)
+    public function ls($categoryId = null, $bookIdcode = null, array $order = [],  $limit = 20, $offset = 0)
     {
-        $bookId = isset($bookIdcode) ? $bookIdcode : null;
+        $bookId = $bookIdcode ?? null;
         
-        $articles = $this->model->ls($bookId, $order,  $limit, $offset);
+        $articles = $this->model::ls($categoryId, $bookId, $order,  $limit, $offset);
         
         return makeResult('success', $articles);
     }
@@ -31,8 +31,50 @@ class ArticleService extends BaseService
             return makeResult('error_id');
         }
         
-        $one = $this->model->one($id);
+        $one = $this->model::one($id);
         return makeResult('success', $one);
     }
         
+    
+    public function nextOne($id, $bookId)
+    {
+                
+        if ( !is_id($id) ) {
+            return makeResult('error_id');
+        }
+        
+        if ( !is_id($bookId) ) {
+            return makeResult('error_id');
+        }
+        
+        $one = $this->model::nextOne($id, $bookId);
+        return makeResult('success', $one);
+    }
+    
+    public function prevOne($id, $bookId)
+    {
+        if ( !is_id($id) ) {
+            return makeResult('error_id');
+        }
+        
+        if ( !is_id($bookId) ) {
+            return makeResult('error_id');
+        }
+        
+        $one = $this->model::prevOne($id, $bookId);
+        return makeResult('success', $one);
+        
+    }
+    
+    public function lsNew($categoryId = null)
+    {
+        
+        $categoryId = $categoryId ?? null;
+        
+        $articles = $this->model::ls($categoryId, null, ['articles.sort_weight', 'desc'], 20, 0);
+        
+        return makeResult('success', $articles);
+        
+    }
+    
 }

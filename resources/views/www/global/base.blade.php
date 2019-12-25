@@ -6,9 +6,11 @@
             <title>@yield('title')</title>
             <meta name="keywords" content="@yield('keywords')">
     		<meta name="description" content="@yield('description')">
-            <link rel="stylesheet" href="/static/www/css/common.css?v=3" type="text/css" />
-            <script type="text/javascript" src="/common/home/js/jquery.js"></script>
-        	<script type="text/javascript" src="/static/www/css/common.js?v=3"></script>
+            <link rel="stylesheet" href="/static/bootstrap-4.4.1/css/bootstrap.css" type="text/css" />
+            <link rel="stylesheet" href="/static/www/css/common.css?v=13" type="text/css" />
+            <script type="text/javascript" src="/static/www/js/jquery-3.4.1.min.js"></script>
+        	<script type="text/javascript" src="/static/www/js/common.js?v=11"></script>
+        	<script type="text/javascript" src="/static/js/DoAjax.js?v=2"></script>
         	<script type="text/javascript">
         		
         		$(function(){
@@ -37,6 +39,36 @@
         			
         		})
         	</script>
+        	 <script>
+
+					function joinBookrack(bookid)
+					{
+						DoAjax.getResponse({
+							'url' : "{{ route('setBookrack') }}",
+							'method' : 'post',
+							'headers' : {
+								'X-CSRF-TOKEN' : '{{ csrf_token() }}'
+							},
+							'params' : {
+								'book_idcode' : bookid
+							},
+							
+	                   	});
+					}
+                	function recommend(bookid){
+                		DoAjax.getResponse({
+							'url' : "{{ route('recommend') }}",
+							'method' : 'post',
+							'headers' : {
+								'X-CSRF-TOKEN' : '{{ csrf_token() }}'
+							},
+							'params' : {
+								'book_idcode' : bookid
+							},
+							
+	                   	});
+                    }
+                </script>
     </head>
     <body>	
     <!--index_top_h1开始-->
@@ -47,58 +79,46 @@
     </div>
     <!--index_top_h2开始-->
     <div class="index_top_h2">
-        <div class="index_logo">
-                <a href="/"><img src="/static/www/images/logo.gif" alt="小说网" title="小说网"/></a>
+        	<div class="index_logo">
+                <a href="/"><img src="/static/www/images/logo.png" class="logo" alt="小说网" title="小说网"/></a>
             </div>
             <div class="index_search for_search_suggest">
-            	<form action="#" method="get">
-                	<input type="text" name="search" value="可通过影视、导演、演员名称进行查找" class="search_input1" autocomplete="off" />
-                	<input type="image" id="searchOn" src="/static/www/images/search.jpg" class="search_input2"/>
-            		
+            	<form action="{{ route('search') }}" method="get">
+                	<input type="text" name="keyword" placeholder="可通过作者、书名进行查找" class="search_input1" autocomplete="off" />
+                	<input type="button" id="search-submit"  class="search_input2"/>
+            		<label id="search-btn" class="search-btn" for="search-submit" onclick="check_search()"><em class="iconfont">搜索</em></label>
             	</form>
+            	<script>
+            		function check_search(){
+                		if( !$('input[name=keyword]').val() ) {
+							return false;
+                    	}
+
+                    	$('form').eq(0).submit()
+                	}	
+            	</script>
             	<!--div class="position_ab search_hot">热门搜索：<volist name="hot" id="ho"><a href="{:U('Index/search','search='.$ho)}">{$ho}</a></volist></div-->
             	 <div class="position_ab search_suggest" style="display:none">
             		<ul>
-            	
             		</ul>
             	</div>
             </div>
-           
-            <div class="left index_gouwuche" >
-                <div class="bdsharebuttonbox">
-                    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
-                    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-                    <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
-                    <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
-                    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
-                    <a href="#" class="bds_more" data-cmd="more"></a>
-                    <a class="bds_count" data-cmd="count"></a>
-                </div>
-                <script>
-                    window._bd_share_config={
-                        "common":{"bdSnsKey":{},"bdText":"{$share}","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},
-                        "share":{}
-                    };
-                    with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-                </script>
+            <div class="top-mybookrack">
+            	<a href="{{ route('bookrack') }}">我的书架</a>
             </div>
+           
     </div>
-    
-    <div class="both height10"></div>
-	<div class="both height10"></div>
-	<div class="both height10"></div>
     <!--index_top_nav开始-->
     <div class="index_top_nav">
-        <div class="nav">
+        <div class="top-nav">
             <div class="nav_right">
                 <ul id="nav">
-                     <li class="cur"><a href="/">首页</a></li>
+                     <li @if ( isset($position) && $position== "home" ) class="cur" @endif><a href="/">首页</a></li>
                      @foreach($categories as $category)
-                     <li><a href="/">{{ $category->name }}</a></li>
+                     <li @if ( isset($position) && $position== "category_{$category->id}" ) class="cur" @endif ><a href="{{ route('category', ['idcode' => $category->id]) }}">{{ $category->name }}</a></li>
                      @endforeach
-                     <li><a href="/">排行榜</a></li>
-                     <li><a href="/">全本</a></li>
-                     <li><a href="/">书架</a></li>
+                     <li @if ( isset($position) && $position== 'rankingList' ) class="cur" @endif><a href="{{ route('rankingList') }}">排行榜</a></li>
+                     <li @if ( isset($position) && $position== 'finish' ) class="cur" @endif><a href="{{ route('finished') }}">完本</a></li>
                 </ul>
             </div>
         </div>
@@ -119,6 +139,7 @@
 	<!-- 广告位 第一到第四个广告位-->
 	
 		<div class="both height10"></div>
+		@yield('breadcrumbs')
 		@yield('recommend')
         <div class="both height10"></div>
         @yield('content')
@@ -136,31 +157,31 @@
 			77777
         </div -->    
     
-    	<div class="both height20"></div>
-        <div class="gongsi radius" style="text-align:left">
+        <!-- div class="gongsi radius" style="text-align:left">
         		<a href="#" target="_blank">111</a>
         		<a href="#" target="_blank">222</a>
         		<a href="#" target="_blank">3444</a>
         		<a href="#" target="_blank">5555</a>
-        </div>
+        </div -->
         <div class="both height10"></div>
         
         <!--index_help开始-->
  		<a class="toTop topPosition45" title="返回顶部" alt="返回顶部" href="javascript:void(0)" style="display:none"></a>
-        <div class="index_state">
+        <!--  div class="index_state">
             申明：本站基于互联网自由分享，
-        </div>
+        </div-->
         <!--index_help结束-->
-        <div class="both height10"></div>
-        <div class="gongsi radius" style="text-align:center">
+        <!-- div class="gongsi radius" style="text-align:center">
             <a href="" target="_blank">联系我们</a><a href=""  target="_blank">广告服务</a>
-        </div>
-        <div class="both height20"></div>
+        </div-->
     </body>
     
 </html>
 <script type="text/javascript">
  //当前位置
+
+
+/*
 var nowPosition = -1;
 $(':input[name=search]').keyup(function(event){
 	var val = $.trim($(this).val());
@@ -238,6 +259,7 @@ $(':input[name=search]').keyup(function(event){
 	
 	
 })
+*/
 </script>
     
     

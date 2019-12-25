@@ -1,16 +1,22 @@
 @extends('www.global.base')
 
+@section('breadcrumbs')
+	<div class="breadcrumbs-nav">
+		<ul>
+			<li><a href="/">首页</a>></li>
+			<li><a href="{{ route('category', ['idcode' => $book->category_id]) }}">{{ $book->category }}</a>></li>
+			<li style="margin-left:10px">{{ $book->name }}</li>
+		</ul>
+	</div>
+@endsection		
 
 @section('content')
+	<div class="height10"></div>
 	<div class="index_box1" >
-			<div>
-    				首页>科幻奇幻>标题
-    			</div>
-    			<div class="height10 both"></div>
             <div>
                 <div class="detail_box width95" style="margin:0 auto">
                     <div class="detail_left left">
-                            <img src="/storage/cover/77c3c12a-1b36-11ea-973c-acde48001122.jpg" title="" alt=""/>
+                            <img src="/storage{{ $book->cover }}" title="{{ $book->name }}" alt="{{ $book->name }}"/>
                     </div>
 					<div class="detail_info left">
 						<div>
@@ -23,8 +29,15 @@
                         <p>更新时间：@if (!$articles->isEmpty()) <a href="{{ route('article', ['idcode' => $articles->last()->id]) }}">{{ $articles->last()->create_time }}</a>@endif</p>
                         <p>最新章节：@if (!$articles->isEmpty()) <a href="{{ route('article', ['idcode' => $articles->last()->id]) }}">{{ $articles->last()->title }}</a>@endif</p>
 					</div>
-					<div class="detail_about left">{{ $book->description }}</div>
+					<div class="detail_about left">
+						<p>{{ $book->description }}</p>
+						<div>
+							<a href="javascript:void(0)" onclick="joinBookrack('{{ $book->id }}')">加入书架</a>
+							<a href="javascript:void(0)" onclick="recommend('{{ $book->id }}')">推荐本书</a>
+						</div>
+					</div>
                 </div>
+               
                 <div class="height30 both"></div>
                 <div class="goods_select_right both">
                     <div class="goods_nav" id="goods_nav">
