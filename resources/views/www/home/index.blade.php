@@ -17,7 +17,6 @@
 							<p><span style="color:#6a6a6a;font-size:12px;">{{ $b_re->author }}</span></p>
 						</li>
 						@empty
-							sss
 						@endforelse
 				</ul>		
 			</div>

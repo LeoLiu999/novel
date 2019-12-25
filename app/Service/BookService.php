@@ -44,8 +44,8 @@ class BookService extends BaseService
     {
         $recommendList = $this->model::ls(null, true, [], 100);
         
-        if ( !$recommendList ) {
-            return ['msg' => 'success'];
+        if ( $recommendList->isEmpty() ) {
+            return makeResult('success');
         }
         
         $limit = 6;
