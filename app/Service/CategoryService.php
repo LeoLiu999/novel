@@ -22,6 +22,7 @@ class CategoryService extends BaseService
         }
         
         $categories = $this->model::ls($isRecommend, $limit);
+        
         return makeResult('success', $categories);
         
     }

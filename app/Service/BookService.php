@@ -64,7 +64,7 @@ class BookService extends BaseService
     
     public function lsNew($categoryId = null)
     {
-        $books = $this->model::ls($categoryId, null, ['sort_weight', 'desc'], 20, 0);
+        $books = $this->model::ls($categoryId, null, ['relation_flag', 'desc'], 20, 0);
         
         return makeResult('success', $books);
     }
