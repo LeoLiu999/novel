@@ -30,10 +30,39 @@
                         <p>最新章节：@if (!$articles->isEmpty()) <a href="{{ route('article', ['idcode' => $articles->last()->id]) }}">{{ $articles->last()->title }}</a>@endif</p>
 					</div>
 					<div class="detail_about left">
-						<p>{{ $book->description }}</p>
-						<div>
+						<p id="description">
+							{{ $book->description }}
+						</p>
+						<div >
+							<span style="float:right;color:#bbb;cursor:pointer;display:none" id="showAll" is-show='yes'>展开</span>
+						</div>
+						<script>
+
+							if( $('#description').height() > 145  ){
+								$('#description').css('height', '145px');
+								$('#showAll').show()
+							} else{
+								$('#description').css('height', '145px');
+								$('#showAll').hide()
+							}
+							
+							$('#showAll').click(function(){
+								if ( $(this).prop('is-show') == 'no' ){
+									
+									$('#description').css('height', '145px');
+									$(this).text('展开');
+									$(this).prop('is-show', 'yes')
+								}else{
+									$('#description').css('height', 'auto');
+									$(this).text('收起');
+									$(this).prop('is-show', 'no')
+								}
+							})
+						</script>
+						<div class="both">
 							<a href="javascript:void(0)" onclick="joinBookrack('{{ $book->id }}')">加入书架</a>
 							<a href="javascript:void(0)" onclick="recommend('{{ $book->id }}')">推荐本书</a>
+							<a href="#bottom">直达底部</a>
 						</div>
 					</div>
                 </div>
@@ -55,7 +84,8 @@
                     	</ul>
                     </div>
                 </div>
-                
+                <div id="bottom">
+                </div>
               
 
 

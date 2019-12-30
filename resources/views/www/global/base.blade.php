@@ -7,7 +7,7 @@
             <meta name="keywords" content="@yield('keywords')">
     		<meta name="description" content="@yield('description')">
             <link rel="stylesheet" href="/static/bootstrap-4.4.1/css/bootstrap.css" type="text/css" />
-            <link rel="stylesheet" href="/static/www/css/common.css?v=13" type="text/css" />
+            <link rel="stylesheet" href="/static/www/css/common.css?v=22" type="text/css" />
             <script type="text/javascript" src="/static/www/js/jquery-3.4.1.min.js"></script>
         	<script type="text/javascript" src="/static/www/js/common.js?v=11"></script>
         	<script type="text/javascript" src="/static/js/DoAjax.js?v=2"></script>

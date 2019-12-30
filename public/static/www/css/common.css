@@ -385,14 +385,15 @@ line-height: 16px;
 .detail_left{margin-top:10px;}
 .detail_left img{
 	border:1px solid #ccc;padding:5px;
-	width:150px;
-	height:180px;
+	width:200px;
+	height:240px;
 	border-radius:5px;
 }
 .color6a{
 	color:#6a6a6a;
 }
 .detail_info{
+	margin-top:20px;
 	margin-left:20px;
 	margin-right:25px;
 	width:30%;
@@ -422,7 +423,6 @@ line-height: 16px;
 	margin-bottom:10px;
 	text-indent:20px;
 	overflow:hidden;
-	height:145px;
 	color:#5a5a5a;
 }
 
@@ -462,12 +462,12 @@ line-height: 16px;
 	overflow:hidden;
 }
 .goods_jianjie ul li{
-	width:33%;
+	width:32%;
+	border-bottom:1px dashed #ccc;
+	padding:10px 0;
+	margin-right:10px;
 	float:left;
 	overflow:hidden;
-	height:20px;
-	line-height:20px;
-	margin-top:10px;
 }
 
 
@@ -486,12 +486,14 @@ line-height: 16px;
 	padding:0 55px 15px 55px;
 }
 .article .article-content{
-	font-size:18px;
-	line-height:60px;
+	line-height:40px;
 	padding:0 10px 10px 10px;
 	text-indent:20px;
 }
-
+.article .article-content p {
+	font-size:18px;
+	color:#222;
+}
 .article-setting{
 	overflow:hidden;
 }

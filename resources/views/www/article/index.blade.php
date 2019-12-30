@@ -37,11 +37,33 @@
 							var size = $(this).val();
 							if( size ){
 								$('.article-title h3').css('font-size', size+'px');
-								$('.article-content').css('font-size', size+'px');
+								$('.article-content p').css('font-size', size+'px');
 							}
         				})
     				</script>
 				</div>
+			</div>
+			<div class="article-footer">
+				<ul>	
+					<li>
+					@if( $prev_article )
+						<a href="{{ route('article', ['idcode' => $prev_article->id]) }}">上一章</a>
+					@else
+						<a href="{{ route('book', ['idcode' => $article->book_id])  }}">上一章</a>
+					@endif
+					</li>
+					<li>
+						<a href="{{ route('book', ['idcode' => $article->book_id]) }}">目录</a>
+					</li>
+					<li>
+					@if( $next_article )
+						<a href="{{ route('article', ['idcode' => $next_article->id]) }}">下一章</a>
+					@else
+						<a href="{{ route('book', ['idcode' => $article->book_id]) }}">下一章</a>
+					@endif
+					</li>
+					
+				</ul>
 			</div>
 			<div class="article-title">
 					<h3>{{ $article->title }}</h3>
