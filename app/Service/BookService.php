@@ -54,7 +54,7 @@ class BookService extends BaseService
         
         $idsToKey = array_flip($ids);
         
-        $idsRand = array_rand($idsToKey, $limit);
+        $idsRand = array_rand($idsToKey, $recommendList->count() > $limit ? $limit : $recommendList->count());
         
         $recommendRandList = $this->model::lsByIds($idsRand, [], $limit);
         
