@@ -29,15 +29,14 @@ class CategoryController extends Controller
         $data['category'] = $category['data'];
         
         $books = $bookService->lsByCategory($category['data']->id);
-        
         $data['books'] = $books['data'];
         
         $booksNew = $bookService->lsNew($category['data']->id);
-        
-        $articlesNew = $articleService->lsNew($category['data']->id);
-        
         $data['books_new'] = $booksNew['data'];
-        $data['articles_new'] = $articlesNew['data'];
+        //最近更新
+        $booksLatelyUpdate = $bookService->lslatelyUpdate($idcode);
+        $data['books_lately_update'] = $booksLatelyUpdate['data'];
+        
         $data['position'] = 'category_'.$category['data']->id;
         
         

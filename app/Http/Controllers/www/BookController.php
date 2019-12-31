@@ -47,11 +47,11 @@ class BookController extends Controller
         $data['books'] = $books['data'];
         
         $booksNew = $bookService->lsNew();
-        
-        $articlesNew = $articleService->lsNew();
-        
         $data['books_new'] = $booksNew['data'];
-        $data['articles_new'] = $articlesNew['data'];
+        
+        $booksLatelyUpdate = $bookService->lslatelyUpdate();
+        $data['books_lately_update'] = $booksLatelyUpdate['data'];
+        
         $data['position'] = 'finish';
         
         return view('www/book/finished', $data);

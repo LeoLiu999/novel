@@ -66,15 +66,6 @@ class ArticleService extends BaseService
         
     }
     
-    public function lsNew($categoryId = null)
-    {
-        
-        $categoryId = $categoryId ?? null;
-        
-        $articles = $this->model::ls($categoryId, null, ['articles.sort_weight', 'desc'], 20, 0);
-        
-        return makeResult('success', $articles);
-        
-    }
+   
     
 }

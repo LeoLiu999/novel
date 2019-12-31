@@ -29,7 +29,7 @@ class HomeController extends Controller
                 
                 $temp['category'] = $category;
                 
-                $books = $bookService->ls($category->id, true);
+                $books = $bookService->ls($category->id, true, ['sort_weight', 'desc'], 8, 0);
                 
                 $temp['books'] = $books['data'];
                  
@@ -40,9 +40,11 @@ class HomeController extends Controller
         
         $categories = $categoryService->ls();
         
+        //新书上架
         $booksNew = $bookService->lsNew();
         
-        $articlesNew = $articleService->lsNew();
+        //最近更新
+        $booksLatelyUpdate = $bookService->lslatelyUpdate();
         
         $randRecommendList = $bookService->lsRandRecommend();
         
@@ -50,7 +52,7 @@ class HomeController extends Controller
         $data['books_by_category'] = $booksByCategory;
         $data['categories'] = $categories['data'];
         $data['books_new'] = $booksNew['data'];
-        $data['articles_new'] = $articlesNew['data'];
+        $data['books_lately_update'] = $booksLatelyUpdate['data'];
         $data['books_recommend'] = $randRecommendList['data'];
         $data['position'] = 'home';
         

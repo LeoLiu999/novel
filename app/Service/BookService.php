@@ -4,18 +4,21 @@ namespace App\Service;
 
 use App\Model\Book;
 use Illuminate\Support\Facades\Redis;
+use App\Model\Article;
 
 class BookService extends BaseService
 {
     protected $model;
+    protected $articleModel;
     
     protected static $rankListRedisKey = [
         'recommend' => 'rankinglist_recommend'
     ];
     
-    public function __construct(Book $bookModel)
+    public function __construct(Book $bookModel, Article $articleModel)
     {
         $this->model = $bookModel;
+        $this->articleModel = $articleModel;
     }
     
     public function ls($categoryId = null, $isRecommend = null, array $order = [], $limit = 8, $offset = 0)
@@ -42,7 +45,8 @@ class BookService extends BaseService
     
     public function lsRandRecommend()
     {
-        $recommendList = $this->model::ls(null, true, [], 100);
+        $isRecommend = true;
+        $recommendList = $this->model::ls(null, $isRecommend, ['sort_weight', 'desc'], 100);
         
         if ( $recommendList->isEmpty() ) {
             return makeResult('success');
@@ -56,7 +60,7 @@ class BookService extends BaseService
         
         $idsRand = array_rand($idsToKey, $recommendList->count() > $limit ? $limit : $recommendList->count());
         
-        $recommendRandList = $this->model::lsByIds($idsRand, [], $limit);
+        $recommendRandList = $this->model::lsByIds($idsRand, ['sort_weight', 'desc'], $limit);
         
         return makeResult('success', $recommendRandList);
         
@@ -64,10 +68,33 @@ class BookService extends BaseService
     
     public function lsNew($categoryId = null)
     {
-        $books = $this->model::ls($categoryId, null, ['relation_flag', 'desc'], 20, 0);
+        $isRecommend = false;
+        
+        $books = $this->model::ls($categoryId, $isRecommend, ['id', 'desc'], 20, 0);
         
         return makeResult('success', $books);
     }
+    
+    public function lslatelyUpdate($categoryId = null)
+    {
+        $isRecommend = false;
+        $books = $this->model::ls($categoryId, $isRecommend, ['update_article_time', 'desc'], 20, 0);
+        
+        
+        if ( !$books->isEmpty() ) {
+            
+            foreach ($books as &$book) {
+                
+                $article = $this->articleModel->lastOne($book->id);
+                $book->article = $article;
+                
+            }
+            
+        }
+        
+        return makeResult('success', $books);
+    }
+    
     
     public function lsByCategory($categoryId)
     {

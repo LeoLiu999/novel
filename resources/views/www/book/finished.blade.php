@@ -33,7 +33,7 @@
 
 @section('newBookAndArticle')
  <div class="index_box1">
-        	@include('www.global.newarticle')
+        	@include('www.global.book_lately_update')
         	@include('www.global.newbook')
  </div>
 @endsection
