@@ -35,6 +35,22 @@ class ArticleController extends Controller
         $data['prev_article'] = $prevArticle['data'];
         $data['next_article'] = $nextArticle['data'];
         
+        
+        
+        $data['title'] = $article['data']->title.'-'.$article['data']->book->name;
+        $data['keywords'] = sprintf(
+            "%s、%s免费阅读、书趣阁、笔趣阁、666看书",
+            $article['data']->title,
+            $article['data']->book->name
+        );
+        $data['description'] = sprintf(
+            '%s的%s是一本%s小说，666看书提供%s最新章节免费阅读',
+            $article['data']->book->author,
+            $article['data']->book->name,
+            $article['data']->book->category,
+            $article['data']->book->name
+        );
+        
         return view('www/article/index', $data);
     }
     

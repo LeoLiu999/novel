@@ -1,5 +1,12 @@
 @extends('www.global.base')
 
+@section('title', $title)
+
+@section('keywords', $keywords)
+
+@section('description', $description)
+
+
 @section('breadcrumbs')
 	<div class="breadcrumbs-nav">
 		<ul>

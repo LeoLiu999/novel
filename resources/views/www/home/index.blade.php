@@ -1,6 +1,10 @@
 @extends('www.global.base')
 
-@section('title', '小说网')
+@section('title', $title)
+
+@section('keywords', $keywords)
+
+@section('description', $description)
 
 @section('recommend')
 	<div class="index_class">

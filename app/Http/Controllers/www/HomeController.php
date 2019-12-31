@@ -35,7 +35,6 @@ class HomeController extends Controller
                  
                 $booksByCategory[] = $temp;
             }
-                
         } 
         
         $categories = $categoryService->ls();
@@ -55,6 +54,10 @@ class HomeController extends Controller
         $data['books_lately_update'] = $booksLatelyUpdate['data'];
         $data['books_recommend'] = $randRecommendList['data'];
         $data['position'] = 'home';
+        
+        $data['title'] = '666看书-最新最全热门小说';
+        $data['keywords'] = '666看书、笔趣阁、书趣阁、最热最全小说、无广告无弹窗小说网、免费小说、VIP小说免费';
+        $data['description'] = '666看书，全网最新最全热门小说，VIP小说免费阅读，无广告无弹窗绿色免费';
         
         return view('www/home/index', $data);
         

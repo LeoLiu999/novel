@@ -1,5 +1,11 @@
 @extends('www.global.base')
 
+@section('title', $title)
+
+@section('keywords', $keywords)
+
+@section('description', $description)
+
 @section('content')
 	  <div class="index_box1">
             <div class="index_box1_left">
