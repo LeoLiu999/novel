@@ -3,14 +3,17 @@
 namespace App\Service;
 
 use App\Model\Article;
+use App\Model\Book;
 
 class ArticleService extends BaseService
 {
     protected $model;
+    protected $bookModel;
     
-    public function __construct(Article $articleModel)
+    public function __construct(Article $articleModel, Book $bookModel)
     {
         $this->model = $articleModel;
+        $this->bookModel = $bookModel;
     }
     
     
@@ -42,7 +45,7 @@ class ArticleService extends BaseService
         return makeResult('success', $articles);
     }
     */
-    public function one($idcode)
+    public function one($idcode, $bookIdcode)
     {
         
         $id = $idcode;
@@ -51,7 +54,23 @@ class ArticleService extends BaseService
             return makeResult('error_id');
         }
         
-        $one = $this->model::one($id);
+        $bookId = $bookIdcode;
+        
+        if ( !is_id($bookId) ) {
+            makeResult('error_bookid');
+        }
+        
+        $book = $this->bookModel::one($bookId);
+        if ( !$book ) {
+            return makeResult('error_book');
+        }
+        
+        $one = $this->model::one($id, $bookId);
+        if ( !$one || $one['book_id'] != $bookId ) {
+            return makeResult('error_article');
+        }
+        
+        $one['book'] = $book;
         return makeResult('success', $one);
     }
         

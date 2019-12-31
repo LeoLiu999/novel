@@ -4,8 +4,8 @@
 	<div class="breadcrumbs-nav">
 		<ul>
 			<li><a href="/">首页</a>></li>
-			<li><a href="{{ route('category', ['idcode' => $article->category_id]) }}">{{ $article->category }}</a>></li>
-			<li><a href="{{ route('book', ['idcode' => $article->book_id]) }}">{{ $article->book_name }}</a>></li>
+			<li><a href="{{ route('category', ['idcode' => $article['book']->category_id]) }}">{{ $article['book']->category }}</a>></li>
+			<li><a href="{{ route('book', ['idcode' => $article['book']->id]) }}">{{ $article['book']->name }}</a>></li>
 			<li style="margin-left:10px">{{ $article->title }}</li>
 		</ul>
 	</div>
@@ -47,7 +47,7 @@
 				<ul>	
 					<li>
 					@if( $prev_article )
-						<a href="{{ route('article', ['idcode' => $prev_article->id]) }}">上一章</a>
+						<a href="{{ route('article', ['idcode' => $prev_article->id, 'book_idcode' => $article->book_id]) }}">上一章</a>
 					@else
 						<a href="{{ route('book', ['idcode' => $article->book_id])  }}">上一章</a>
 					@endif
@@ -57,7 +57,7 @@
 					</li>
 					<li>
 					@if( $next_article )
-						<a href="{{ route('article', ['idcode' => $next_article->id]) }}">下一章</a>
+						<a href="{{ route('article', ['idcode' => $next_article->id, 'book_idcode' => $article->book_id]) }}">下一章</a>
 					@else
 						<a href="{{ route('book', ['idcode' => $article->book_id]) }}">下一章</a>
 					@endif
@@ -77,7 +77,7 @@
 				<ul>	
 					<li>
 					@if( $prev_article )
-						<a href="{{ route('article', ['idcode' => $prev_article->id]) }}">上一章</a>
+						<a href="{{ route('article', ['idcode' => $prev_article->id, 'book_idcode' => $article->book_id]) }}">上一章</a>
 					@else
 						<a href="{{ route('book', ['idcode' => $article->book_id])  }}">上一章</a>
 					@endif
@@ -87,7 +87,7 @@
 					</li>
 					<li>
 					@if( $next_article )
-						<a href="{{ route('article', ['idcode' => $next_article->id]) }}">下一章</a>
+						<a href="{{ route('article', ['idcode' => $next_article->id, 'book_idcode' => $article->book_id]) }}">下一章</a>
 					@else
 						<a href="{{ route('book', ['idcode' => $article->book_id]) }}">下一章</a>
 					@endif

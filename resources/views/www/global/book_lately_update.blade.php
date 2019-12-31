@@ -6,7 +6,13 @@
 			<li>
 				<span class="width15"><a href="{{ route('category', ['idcode'=> $book->category_id]) }}">「{{ $book->category }}」</a></span>
 				<span class="width20"><a href="{{ route('book', ['idcode'=> $book->id]) }}">{{ $book->name }}</a></span>
-				<span class="width50"><a href="{{ route( isset( $book->article->id ) ? 'article' : 'book', ['idcode'=> $book->article->id ?? $book->id]) }}">{{ $book->article->title ?? $book->name }}</a></span>
+				<span class="width50">
+				@if (isset($book->article->id ))
+				<a href="{{ route( 'article' , ['idcode'=> $book->article->id, 'book_idcode' => $book->id]) }}">{{ $book->article->title ?? $book->name }}</a>
+				@else
+				<a href="{{ route( 'book' , ['idcode'=> $book->id]) }}">{{ $book->name }}</a>
+				@endif
+				</span>
 				<span class="width15 color999">{{ $book->author }}</span>
 				<span class="right color999">{{ date('m-d', $book->update_article_time) }}</span>
 			</li>

@@ -27,7 +27,7 @@ Route::domain(env('WWW_SITE'))->namespace('www')->group(function(){
     
     Route::post('books/actionRecommend', 'BookController@actionRecommend')->name('recommend');
     
-    Route::get('articles/{idcode}', 'ArticleController@index')->name('article');
+    Route::get('articles/{idcode}/book/{book_idcode}', 'ArticleController@index')->name('article');
     
     Route::get('users/myBookrack', 'UserController@myBookrack')->name('bookrack');
     

@@ -6,22 +6,26 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Service\ArticleService;
 use App\Service\CategoryService;
+use App\Service\BookService;
 
 class ArticleController extends Controller
 {
     
-    public function index(Request $request, CategoryService $categoryService,  ArticleService $articleService, $idcode)
+    public function index(Request $request, CategoryService $categoryService, BookService $bookService,  ArticleService $articleService, $idcode, $bookIdcode)
     {
+        
         $categories = $categoryService->ls();
         
         $data = [];
         $data['categories'] = $categories['data'];
         
-        $article = $articleService->one($idcode);
+        $article = $articleService->one($idcode, $bookIdcode);
         
         if ( !$article['data'] ) {
             return response()->view('www/global/404', $data, 404);
         }
+        
+       
         
         $prevArticle = $articleService->prevOne($article['data']->id, $article['data']->book_id);
         

@@ -26,8 +26,8 @@
                         <p>类<span></span>型：{{ $book->category }}</p>
                         <p>状<span></span>态：{{ formatState($book->state) }}</p>
                         <p>字<span></span>数：{{ formatWords($book->words) }}</p>
-                        <p>更新时间：@if (!$articles->isEmpty()) <a href="{{ route('article', ['idcode' => $articles->last()->id]) }}">{{ $articles->last()->create_time }}</a>@endif</p>
-                        <p>最新章节：@if (!$articles->isEmpty()) <a href="{{ route('article', ['idcode' => $articles->last()->id]) }}">{{ $articles->last()->title }}</a>@endif</p>
+                        <p>更新时间：@if (!$articles->isEmpty()) <a href="{{ route('article', ['idcode' => $articles->last()->id, 'book_idcode' => $book->id]) }}">{{ $articles->last()->create_time }}</a>@endif</p>
+                        <p>最新章节：@if (!$articles->isEmpty()) <a href="{{ route('article', ['idcode' => $articles->last()->id, 'book_idcode' => $book->id]) }}">{{ $articles->last()->title }}</a>@endif</p>
 					</div>
 					<div class="detail_about left">
 						<p id="description">
@@ -76,7 +76,7 @@
                     	<ul>
                     		@forelse($articles as $article)
                     		<li>
-                    			<a href="{{ route('article', ['idcode' => $article->id]) }}">{{ $article->title }}</a>
+                    			<a href="{{ route('article', ['idcode' => $article->id, 'book_idcode' => $book->id]) }}">{{ $article->title }}</a>
                     		</li>
                     		@empty
                     			赞无数据
