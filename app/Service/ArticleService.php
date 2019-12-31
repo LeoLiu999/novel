@@ -13,6 +13,26 @@ class ArticleService extends BaseService
         $this->model = $articleModel;
     }
     
+    
+    public function lsByBook( $bookIdcode)
+    {
+        $bookId = $bookIdcode;
+        
+        if (!is_id($bookId)) {
+            return makeResult('error_bookid');
+        }
+        
+        $articles = $this->model::lsByBook( $bookId);
+        
+        return makeResult('success', $articles);
+    }
+    
+    
+    
+    
+    
+    /*
+    
     public function ls($categoryId = null, $bookIdcode = null, array $order = [],  $limit = 20, $offset = 0)
     {
         $bookId = $bookIdcode ?? null;
@@ -21,7 +41,7 @@ class ArticleService extends BaseService
         
         return makeResult('success', $articles);
     }
-    
+    */
     public function one($idcode)
     {
         

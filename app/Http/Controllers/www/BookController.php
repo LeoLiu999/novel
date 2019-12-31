@@ -24,7 +24,7 @@ class BookController extends Controller
             return response()->view('www/global/404', $data, 404);
         }
         
-        $articles = $articleService->ls(null, $idcode, ['articles.sort_weight', 'asc'], 10000);
+        $articles = $articleService->lsByBook($idcode);
         
         $data['book'] = $book['data'];
         $data['articles'] = $articles['data'];

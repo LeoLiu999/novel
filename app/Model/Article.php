@@ -56,8 +56,21 @@ class Article extends Model
         
     }
     
-    public static function ls()
+    public static function lsByBook($bookId = null)
     {
+        $where = [];
+        $where['is_del'] = false;
+        $where['book_id'] = $bookId;
+        
+        return self::suffix(self::buildSuffix($bookId))->where($where)
+        ->select(
+            'id',
+            'title',
+            'content',
+            'create_time',
+            'book_id'
+        )->orderBy('sort_weight', 'desc')
+        ->get();
         
     }
     
