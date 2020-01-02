@@ -200,11 +200,11 @@ body{
 	margin-right:200px;
 }
 .logo{
-	width:200px;
-	height:80px;
+	width:218px;
+	height:55px;
 }
 .index_search{
-	margin-top:20px;
+	margin-top:8px;
 	float:left;
 	overflow:hidden;
 	position:relative;
@@ -241,7 +241,7 @@ body{
 .iconfont{
 }
 .top-mybookrack{
-	margin-top:20px;
+	margin-top:8px;
 	float:right;
 	border:1px solid #dbdbdb;
 	margin-right:40px;

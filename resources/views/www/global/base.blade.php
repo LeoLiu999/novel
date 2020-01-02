@@ -7,7 +7,8 @@
             <meta name="keywords" content="@yield('keywords')">
     		<meta name="description" content="@yield('description')">
             <link rel="stylesheet" href="/static/bootstrap-4.4.1/css/bootstrap.css" type="text/css" />
-            <link rel="stylesheet" href="/static/www/css/common.css?v=22" type="text/css" />
+            <link rel="stylesheet" href="/static/www/css/common.css?v=23" type="text/css" />
+            <link rel="shortcut icon" type="image/x-icon" href="/favicon_48x48.ico">
             <script type="text/javascript" src="/static/www/js/jquery-3.4.1.min.js"></script>
         	<script type="text/javascript" src="/static/www/js/common.js?v=11"></script>
         	<script type="text/javascript" src="/static/js/DoAjax.js?v=2"></script>
@@ -80,7 +81,7 @@
     <!--index_top_h2开始-->
     <div class="index_top_h2">
         	<div class="index_logo">
-                <a href="/"><img src="/static/www/images/logo.png" class="logo" alt="小说网" title="小说网"/></a>
+                <a href="/"><img src="/static/www/images/logo_1.png" class="logo" alt="小说网" title="小说网"/></a>
             </div>
             <div class="index_search for_search_suggest">
             	<form action="{{ route('search') }}" method="get">
