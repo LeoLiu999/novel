@@ -12,7 +12,7 @@
         	<script type="text/javascript" src="/static/www/js/common.js?v=11"></script>
         	<script type="text/javascript" src="/static/js/DoAjax.js?v=2"></script>
         	<script type="text/javascript">
-        		
+        		/*
         		$(function(){
         			
         			var data = $('img');
@@ -37,7 +37,7 @@
                			})
         			})
         			
-        		})
+        		})*/
         	</script>
         	 <script>
 

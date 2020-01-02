@@ -86,8 +86,13 @@ class ArticleService extends BaseService
             return makeResult('error_id');
         }
         
-        $one = $this->model::nextOne($id, $bookId);
-        return makeResult('success', $one);
+        $one = $this->model::one($id, $bookId);
+        if ( !$one ) {
+            return makeResult('error_one');
+        }
+        
+        $nextOne = $this->model::nextOne($bookId, $one['sort_weight']);
+        return makeResult('success', $nextOne);
     }
     
     public function prevOne($id, $bookId)
@@ -100,8 +105,13 @@ class ArticleService extends BaseService
             return makeResult('error_id');
         }
         
-        $one = $this->model::prevOne($id, $bookId);
-        return makeResult('success', $one);
+        $one = $this->model::one($id, $bookId);
+        if ( !$one ) {
+            return makeResult('error_one');
+        }
+        
+        $prevOne = $this->model::prevOne($bookId, $one['sort_weight']);
+        return makeResult('success', $prevOne);
         
     }
     

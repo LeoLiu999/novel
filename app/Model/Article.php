@@ -51,7 +51,8 @@ class Article extends Model
             'title',
             'content',
             'create_time',
-            'book_id'
+            'book_id',
+            'sort_weight'
          )
          ->first();
         
@@ -96,11 +97,12 @@ class Article extends Model
     }
     
     
-    public static function nextOne($id, $bookId)
+    public static function nextOne($bookId, $sortWeight)
     {
         $where = [];
         $where['is_del'] = false;
-        $where[] = ['id', '>', $id];
+        $where['book_id'] = $bookId;
+        $where[] = ['sort_weight', '>', $sortWeight];
         
         return self::suffix(self::buildSuffix($bookId))
         ->where($where)
@@ -111,15 +113,17 @@ class Article extends Model
             'content',
             'create_time'
         )
+        ->orderBy('sort_weight', 'asc')
         ->first();
         
     }
     
-    public static function prevOne($id, $bookId)
+    public static function prevOne($bookId, $sortWeight)
     {
         $where = [];
         $where['is_del'] = false;
-        $where[] = ['id', '<', $id];
+        $where['book_id'] = $bookId;
+        $where[] = ['sort_weight', '<', $sortWeight];
         
         return self::suffix(self::buildSuffix($bookId))
         ->where($where)
@@ -130,6 +134,7 @@ class Article extends Model
             'content',
             'create_time'
         )
+        ->orderBy('sort_weight', 'desc')
         ->first();
             
     }
