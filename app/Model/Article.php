@@ -49,7 +49,6 @@ class Article extends Model
         ->select(
             'id',
             'title',
-            'content',
             'create_time',
             'book_id',
             'sort_weight'
@@ -69,7 +68,6 @@ class Article extends Model
         ->select(
             'id',
             'title',
-            'content',
             'create_time',
             'book_id'
         )->orderBy('sort_weight', 'asc')
@@ -89,7 +87,6 @@ class Article extends Model
         ->select(
             'id',
             'title',
-            'content',
             'create_time',
             'book_id'
         )->latest('sort_weight')
@@ -110,7 +107,6 @@ class Article extends Model
             'id',
             'book_id',
             'title',
-            'content',
             'create_time'
         )
         ->orderBy('sort_weight', 'asc')
@@ -131,7 +127,6 @@ class Article extends Model
             'id',
             'book_id',
             'title',
-            'content',
             'create_time'
         )
         ->orderBy('sort_weight', 'desc')
