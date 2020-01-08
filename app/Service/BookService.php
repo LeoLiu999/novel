@@ -68,7 +68,7 @@ class BookService extends BaseService
     
     public function lsNew($categoryId = null)
     {
-        $isRecommend = false;
+        $isRecommend = null;
         
         $books = $this->model::ls($categoryId, $isRecommend, ['id', 'desc'], 20, 0);
         
@@ -77,7 +77,7 @@ class BookService extends BaseService
     
     public function lslatelyUpdate($categoryId = null)
     {
-        $isRecommend = false;
+        $isRecommend = null;
         $books = $this->model::ls($categoryId, $isRecommend, ['update_article_time', 'desc'], 20, 0);
         
         

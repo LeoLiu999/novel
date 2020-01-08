@@ -51,6 +51,7 @@ class Article extends Model
             'title',
             'create_time',
             'book_id',
+            'relation_flag',
             'sort_weight'
          )
          ->first();

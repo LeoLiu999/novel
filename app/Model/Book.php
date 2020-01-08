@@ -98,6 +98,8 @@ class Book extends Model
             'books.create_time',
             'books.is_recommend',
             'books.description',
+            'books.origin_site',
+            'books.relation_flag',
             'books.cover',
             'categories.name as category'
         )

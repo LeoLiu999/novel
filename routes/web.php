@@ -37,6 +37,19 @@ Route::domain(env('WWW_SITE'))->namespace('www')->group(function(){
         return response()->view('www/global/404', ['categories' => App\Model\Category::ls(true)], 404);
     });
 });
+
+    
+Route::domain(env('MOBILE_SITE'))->namespace('mobile')->group(function(){
+    
+    Route::get('/', 'HomeController@index')->name('mobile');
+    
+    Route::fallback(function () {
+        return response()->view('www/global/404', ['categories' => App\Model\Category::ls(true)], 404);
+    });
+});
+
+
+
 Route::fallback(function () {
     return response()->redirectTo(env('APP_URL'));
 });

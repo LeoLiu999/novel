@@ -9,7 +9,7 @@
             <link rel="stylesheet" href="/static/bootstrap-4.4.1/css/bootstrap.css" type="text/css" />
             <link rel="stylesheet" href="/static/www/css/common.css?v=23" type="text/css" />
             <link rel="shortcut icon" type="image/x-icon" href="/favicon_48x48.ico">
-            <script type="text/javascript" src="/static/www/js/jquery-3.4.1.min.js"></script>
+            <script type="text/javascript" src="/static/js/jquery-3.4.1.min.js"></script>
         	<script type="text/javascript" src="/static/www/js/common.js?v=11"></script>
         	<script type="text/javascript" src="/static/js/DoAjax.js?v=2"></script>
         	<script type="text/javascript">

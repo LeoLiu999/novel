@@ -1,0 +1,84 @@
+@CHARSET "UTF-8";
+
+
+.bgf6f7f9{
+	background:#f6f7f9
+}
+
+.home-module{
+	background:#fff;
+	
+}
+.module-title{
+    font-weight: 400;
+	font-size:1rem;
+    color: #33373d;
+}
+
+.module-title::before {
+    display: inline-block;
+    box-sizing: border-box;
+    width: .625rem;
+    height: 1em;
+    content: '';
+    vertical-align: -.22ex;
+    color: transparent;
+    border-left: 2px solid #ed424b;
+}
+
+.icon{
+	position: absolute;
+    right: 0;
+    bottom: 1.625rem;
+    left: 0;
+    margin: auto;
+}
+
+.icon-a{
+	font-size: .75rem;
+    position: relative;
+    display: inline-block;
+    width: 3.5rem;
+    height: 3.625rem;
+    text-align: center;
+}
+
+.icon-category{
+	background-image: url(../images/icon.png);
+    background-size: 87px 87px;
+	background-position: -63px -28px;
+    width: 24px;
+    height: 24px;
+}
+
+.icon-rank{
+	background-image: url(../images/icon.png);
+    background-size: 87px 87px;
+	background-position: 0 0;
+    width: 27px;
+    height: 26px;
+}
+
+.icon-finish{
+	background-image: url(../images/icon.png);
+    background-size: 87px 87px;
+	background-position: 0 -60px;
+    width: 20px;
+    height: 27px;
+}
+
+.icon-b{
+	position: absolute;
+    right: 0;
+    bottom: .1875rem;
+    left: 0;
+	bottom:-3px;
+	color:black
+}
+
+.logo{
+	width:inherit;
+	height:1.25rem;
+	
+	
+}
