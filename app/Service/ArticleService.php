@@ -126,7 +126,7 @@ class ArticleService extends BaseService
             } 
             $buffer .= $input;
         }
-        
+        socket_close($socket);
         return makeResult('success', $buffer ? json_decode($buffer, true) : null );
     }
     
