@@ -43,6 +43,10 @@ Route::domain(env('MOBILE_SITE'))->namespace('mobile')->group(function(){
     
     Route::get('/', 'HomeController@index')->name('mobile');
     
+    Route::get('books/search', 'BookController@search')->name('m_search');
+    
+    Route::get('books/{idcode}', 'BookController@index')->name('m_book');
+    
     Route::fallback(function () {
         return response()->view('www/global/404', ['categories' => App\Model\Category::ls(true)], 404);
     });

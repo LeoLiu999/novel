@@ -5,14 +5,13 @@ namespace App\Http\Controllers\www;
 use App\Http\Controllers\Controller;
 use App\Service\CategoryService;
 use App\Service\BookService;
-use Illuminate\Http\Request;
 use App\Service\ArticleService;
 
 class CategoryController extends Controller
 {
     
     
-    public function index(Request $request, CategoryService $categoryService, BookService $bookService, ArticleService $articleService, $idcode)
+    public function index(CategoryService $categoryService, BookService $bookService, ArticleService $articleService, $idcode)
     {
         
         $categories = $categoryService->ls();

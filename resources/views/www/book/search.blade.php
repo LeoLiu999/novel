@@ -30,7 +30,7 @@
 	                    </div>
 	                </div>
 	                @empty
-	                	赞无推荐
+	                	赞无数据
 	               	@endforelse
             </div>
             <div style="margin-left:350px">{{ $books->appends(['keyword' => $keyword])->links() }}</div> 

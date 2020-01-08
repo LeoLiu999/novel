@@ -43,7 +43,7 @@ class BookService extends BaseService
         
     }
     
-    public function lsRandRecommend()
+    public function lsRandRecommend($limit = 6)
     {
         $isRecommend = true;
         $recommendList = $this->model::ls(null, $isRecommend, ['sort_weight', 'desc'], 100);
@@ -51,9 +51,7 @@ class BookService extends BaseService
         if ( $recommendList->isEmpty() ) {
             return makeResult('success');
         }
-        
-        $limit = 6;
-        
+            
         $ids = array_column($recommendList->toArray(), 'id');
         
         $idsToKey = array_flip($ids);

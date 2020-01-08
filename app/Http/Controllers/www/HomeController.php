@@ -3,19 +3,15 @@
 namespace App\Http\Controllers\www;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Service\BookService;
 use App\Service\CategoryService;
 use App\Service\ArticleService;
 
-
 class HomeController extends Controller
 {
     //
-    
-    public function index(Request $request, BookService $bookService, CategoryService $categoryService, ArticleService $articleService)
+    public function index(BookService $bookService, CategoryService $categoryService, ArticleService $articleService)
     {
-        
         $categoriesRecommend = $categoryService->ls(true, 6);
         
         $booksByCategory = [];

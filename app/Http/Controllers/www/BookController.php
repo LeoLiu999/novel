@@ -11,7 +11,7 @@ use App\Service\ArticleService;
 class BookController extends Controller
 {
     
-    public function index(Request $request, CategoryService $categoryService, BookService $bookService, ArticleService $articleService, $idcode)
+    public function index(CategoryService $categoryService, BookService $bookService, ArticleService $articleService, $idcode)
     {
         $categories = $categoryService->ls();
         
@@ -48,7 +48,7 @@ class BookController extends Controller
     }
  
     
-    public function finished(Request $request, CategoryService $categoryService, BookService $bookService, ArticleService $articleService)
+    public function finished(CategoryService $categoryService, BookService $bookService, ArticleService $articleService)
     {
         
         $categories = $categoryService->ls();
@@ -76,7 +76,7 @@ class BookController extends Controller
         return view('www/book/finished', $data);
     }
     
-    public function rankingList(Request $request, CategoryService $categoryService, BookService $bookService)
+    public function rankingList(CategoryService $categoryService, BookService $bookService)
     {
         $categories = $categoryService->ls();
         

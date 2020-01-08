@@ -6,14 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Service\BookService;
 use App\Service\CategoryService;
-use App\Service\ArticleService;
+use App\Service\BannerService;
+use App\Service\RankinglistService;
 
 
 class HomeController extends Controller
 {
     //
     
-    public function index(Request $request, BookService $bookService, CategoryService $categoryService, ArticleService $articleService)
+    public function index(Request $request, BookService $bookService, 
+                        CategoryService $categoryService, BannerService $bannerService, 
+                        RankinglistService $rankinglistService)
     {
         
         $categoriesRecommend = $categoryService->ls(true, 6);
@@ -21,7 +24,6 @@ class HomeController extends Controller
         $booksByCategory = [];
         
         if ( isset($categoriesRecommend['data']) && !$categoriesRecommend['data']->isEmpty() ) {
-            
             
             foreach ($categoriesRecommend['data'] as $category) {
                 
@@ -37,22 +39,23 @@ class HomeController extends Controller
             }
         } 
         
-        $categories = $categoryService->ls();
+        $randRecommendList = $bookService->lsRandRecommend(8);
         
-        //新书上架
-        $booksNew = $bookService->lsNew();
+        $rankingClick     = $rankinglistService->lsClick();
+        $rankingRecommend = $rankinglistService->lsRecommend();
+        $rankingCollect   = $rankinglistService->lsCollect();
         
-        //最近更新
-        $booksLatelyUpdate = $bookService->lslatelyUpdate();
-        
-        $randRecommendList = $bookService->lsRandRecommend();
+        $banners = $bannerService->ls();
         
         $data = [];
         $data['books_by_category'] = $booksByCategory;
-        $data['categories'] = $categories['data'];
-        $data['books_new'] = $booksNew['data'];
-        $data['books_lately_update'] = $booksLatelyUpdate['data'];
-        $data['books_recommend'] = $randRecommendList['data'];
+        $data['books_recommend']   = $randRecommendList['data'];
+        
+        $data['ranking_click']     = $rankingClick['data'];
+        $data['ranking_recommend'] = $rankingRecommend['data'];
+        $data['ranking_collect']   = $rankingCollect['data'];
+        
+        $data['banners']  = $banners['data'];
         $data['position'] = 'home';
         
         $data['title'] = '666看书-最新最全热门小说';

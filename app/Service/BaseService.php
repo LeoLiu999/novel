@@ -5,8 +5,4 @@ namespace App\Service;
 abstract class BaseService
 {
     
-    
-    
-    
-    
 }
