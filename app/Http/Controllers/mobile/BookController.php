@@ -50,6 +50,9 @@ class BookController extends Controller
         
         $books = $bookService->lsFinished();
         
+        $randRecommendList = $bookService->lsRandRecommend(8);
+        $data['books_recommend']   = $randRecommendList['data'];
+        
         $data['books'] = $books['data'];
         
         $data['title'] = '完本小说';

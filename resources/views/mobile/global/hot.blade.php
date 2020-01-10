@@ -1,4 +1,4 @@
-<div class="home-module px-3 pt-3 mt-3">
+<div class="home-module px-3 pt-3">
 		<h5 class="module-title mb-3">热门推荐</h5>
 		<ul class="list-inline  text-nowrap"  style="overflow-y: hidden;">
 			

@@ -9,6 +9,11 @@
 @section('top')
 	@include('mobile.global.top', ['position_name' => '', 'position' => 'finished'])
 @endsection
+
+@section('hot')
+	@include('mobile.global.hot', ['position' => 'finished'])
+@endsection
+
 @section('content')
 	<div class="home-module px-2 pt-3">
 		<h5 class="module-title mb-3">完本</h5>

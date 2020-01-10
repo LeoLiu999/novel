@@ -45,6 +45,8 @@
 	@include('mobile.global.nav', ['position' => 'home'])
 @endsection
 @section('hot')
+	<div class="mt-3">
+	</div>
 	@include('mobile.global.hot', ['position' => 'home'])
 @endsection
 

@@ -3,8 +3,9 @@
     	<div onclick="history.back()">
         	< 
         </div>
-        <div class="">{{ $position_name }}</div>
+        <div>
         @include('mobile.global.searchform', ['position' => 'top'])
+        </div>
     </nav>
      @include('mobile.global.nav', ['position' => $position])
 </div>

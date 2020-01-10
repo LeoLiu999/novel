@@ -11,7 +11,7 @@
 @endsection
 
 @section('hot')
-	@include('mobile.global.hot', ['position' => 'home'])
+	@include('mobile.global.hot', ['position' => 'category'])
 @endsection
 
 @section('content')
