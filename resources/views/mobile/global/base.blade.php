@@ -9,7 +9,7 @@
         <meta name="keywords" content="@yield('keywords')">
 		<meta name="description" content="@yield('description')">
         <link rel="stylesheet" href="/static/bootstrap-4.4.1/css/bootstrap.min.css" type="text/css" />
-        <link rel="stylesheet" href="/static/mobile/css/common.css?v=7" type="text/css" />
+        <link rel="stylesheet" href="/static/mobile/css/common.css?v=8" type="text/css" />
         <link rel="shortcut icon" type="image/x-icon" href="/favicon_48x48.ico">
         <script type="text/javascript" src="/static/js/jquery-3.4.1.min.js"></script>
         <script type="text/javascript" src="/static/bootstrap-4.4.1/js/bootstrap.min.js"></script>
