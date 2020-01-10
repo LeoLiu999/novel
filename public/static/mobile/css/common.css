@@ -110,6 +110,7 @@
 	font-size: .875rem;
     overflow: hidden;
     color: #6c757d;
+	word-break: break-all;
 }
 
 .text-969{
