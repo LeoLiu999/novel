@@ -1,27 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\www;
+namespace App\Http\Controllers\mobile;
 
 use App\Http\Controllers\Controller;
 use App\Service\ArticleService;
-use App\Service\CategoryService;
 use App\Service\BookService;
 
 class ArticleController extends Controller
 {
     
-    public function index(CategoryService $categoryService, BookService $bookService,  ArticleService $articleService, $idcode, $bookIdcode)
+    public function index(BookService $bookService,  ArticleService $articleService, $idcode, $bookIdcode)
     {
         
-        $categories = $categoryService->ls();
-        
         $data = [];
-        $data['categories'] = $categories['data'];
         
         $article = $articleService->one($idcode, $bookIdcode);
         
-        if ( $article['msg'] != 'success' or !$article['data'] ) {
-            return response()->view('www/global/404', $data, 404);
+        if ($article['msg'] != 'success' or !$article['data'] ) {
+            return response()->view('mobile/global/404', $data, 404);
         }
        
         $prevArticle = $articleService->prevOne($article['data']->id, $article['data']->book_id);
@@ -32,21 +28,21 @@ class ArticleController extends Controller
         $data['prev_article'] = $prevArticle['data'];
         $data['next_article'] = $nextArticle['data'];
         
-        $data['title'] = $article['data']->title.'-'.$article['data']->book->name;
+        $data['title'] = $article['data']->title.'-'.$article['data']->book->name.'-666看书_笔趣阁';
         $data['keywords'] = sprintf(
-            "%s、%s免费阅读、书趣阁、笔趣阁、666看书",
+            "%s、%s免费阅读、666看书、笔趣阁、书趣阁、最热最全小说、无广告无弹窗小说网、免费小说、VIP小说免费",
             $article['data']->title,
             $article['data']->book->name
         );
         $data['description'] = sprintf(
-            '%s的%s是一本%s小说，666看书提供%s最新章节免费阅读',
+            '%s的%s是一本%s小说，666看书提供%s最新章节免费阅读,666看书，全网最新最全热门小说，VIP小说免费阅读，无广告无弹窗绿色免费',
             $article['data']->book->author,
             $article['data']->book->name,
             $article['data']->book->category,
             $article['data']->book->name
         );
         
-        return view('www/article/index', $data);
+        return view('mobile/article/index', $data);
     }
     
 }

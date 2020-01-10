@@ -9,14 +9,11 @@ use App\Service\UserService;
 class UserController extends Controller
 {
     
- 
-    
     public function myBookrack(UserService $userService)
     {
         $userId = null;
         
         $data = [];
-        
         
         $books = $userService->lsMyBookrack($userId);        
         $data['books'] = $books['data'];           
@@ -28,9 +25,9 @@ class UserController extends Controller
         return view('mobile/user/mybookrack', $data);
         
     }
+    
     public function actionSetBookrack(Request $request, UserService $userService)
     {
-        
         
         $bookIdcode=  $request->input('book_idcode');
         

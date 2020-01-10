@@ -30,21 +30,6 @@ class ArticleService extends BaseService
         return makeResult('success', $articles);
     }
     
-    
-    
-    
-    
-    /*
-    
-    public function ls($categoryId = null, $bookIdcode = null, array $order = [],  $limit = 20, $offset = 0)
-    {
-        $bookId = $bookIdcode ?? null;
-        
-        $articles = $this->model::ls($categoryId, $bookId, $order,  $limit, $offset);
-        
-        return makeResult('success', $articles);
-    }
-    */
     public function one($idcode, $bookIdcode)
     {
         

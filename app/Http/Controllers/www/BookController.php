@@ -20,7 +20,7 @@ class BookController extends Controller
         
         $book = $bookService->one($idcode); 
                 
-        if ( !$book['data'] ) {
+        if ( $book['data'] != 'success' || !$book['data'] ) {
             return response()->view('www/global/404', $data, 404);
         }
         
@@ -30,20 +30,19 @@ class BookController extends Controller
         $data['articles'] = $articles['data'];
         $data['position'] = 'category_'.$book['data']->category_id;
         
-        $data['title'] = $book['data']->name.'免费阅读';
+        $data['title'] = $book['data']->name.'免费阅读-666看书_笔趣阁';
         $data['keywords'] = sprintf(
-            '%s、%s、666看书、笔趣阁、免费、无广告无弹窗、最新章节', 
-            $book['data']->name, 
+            '666看书、笔趣阁、书趣阁、最热最全完本小说、无广告无弹窗小说网、免费小说、VIP小说免费、%s最新章节、%s',
+            $book['data']->name,
             $book['data']->author
         );
         $data['description'] = sprintf(
-            '%s的%s是一本%s小说，666看书提供%s最新章节免费阅读', 
-            $book['data']->author, 
-            $book['data']->name, 
-            $book['data']->category, 
+            '%s的%s是一本%s小说，666看书提供%s最新章节免费阅读，666看书，全网最新最全热门小说，VIP小说免费阅读，无广告无弹窗绿色免费',
+            $book['data']->author,
+            $book['data']->name,
+            $book['data']->category,
             $book['data']->name
         );
-        
         return view('www/book/index', $data);
     }
  

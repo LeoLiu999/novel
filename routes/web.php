@@ -67,6 +67,14 @@ Route::domain($mobileSite)->namespace('mobile')->group(function(){
     
     Route::get('users/myBookrack', 'UserController@myBookrack')->name('m_bookrack');
     
+    Route::get('/book/{book_idcode}/catalog', 'BookController@catalog')->name('m_bookCatalog');
+    
+    Route::get('articles/{idcode}/book/{book_idcode}', 'ArticleController@index')->name('m_article');
+    
+    Route::post('users/actionSetBookrack', 'UserController@actionSetBookrack')->name('m_setBookrack');
+    
+    Route::post('books/actionRecommend', 'BookController@actionRecommend')->name('m_recommend');
+    
     Route::fallback(function () {
         return response()->view('mobile/global/404', [], 404);
     });

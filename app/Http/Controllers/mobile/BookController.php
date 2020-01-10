@@ -18,8 +18,8 @@ class BookController extends Controller
         
         $book = $bookService->one($idcode); 
                 
-        if ( !$book['data'] ) {
-            exit('404 not found');
+        if ( $book['msg'] != 'success' or !$book['data'] ) {
+            return response()->view('mobile/global/404', $data, 404);
         }
         
         $articles = $articleService->lsByBook($idcode);
@@ -27,14 +27,14 @@ class BookController extends Controller
         $data['book'] = $book['data'];
         $data['articles'] = $articles['data'];
         
-        $data['title'] = $book['data']->name.'免费阅读';
+        $data['title'] = $book['data']->name.'免费阅读-666看书_笔趣阁';
         $data['keywords'] = sprintf(
-            '%s、%s、666看书、笔趣阁、免费、无广告无弹窗、最新章节', 
+            '666看书、笔趣阁、书趣阁、最热最全完本小说、无广告无弹窗小说网、免费小说、VIP小说免费、%s最新章节、%s', 
             $book['data']->name, 
             $book['data']->author
         );
         $data['description'] = sprintf(
-            '%s的%s是一本%s小说，666看书提供%s最新章节免费阅读', 
+            '%s的%s是一本%s小说，666看书提供%s最新章节免费阅读，666看书，全网最新最全热门小说，VIP小说免费阅读，无广告无弹窗绿色免费', 
             $book['data']->author, 
             $book['data']->name, 
             $book['data']->category, 
@@ -55,7 +55,7 @@ class BookController extends Controller
         
         $data['books'] = $books['data'];
         
-        $data['title'] = '完本小说';
+        $data['title'] = '完本小说-666看书_笔趣阁';
         $data['keywords'] = '666看书、笔趣阁、书趣阁、最热最全完本小说、无广告无弹窗小说网、免费小说、VIP小说免费';
         $data['description'] = '666看书，全网最新最全热门完本小说，VIP小说免费阅读，无广告无弹窗绿色免费';
         
@@ -87,6 +87,42 @@ class BookController extends Controller
         
         return view('mobile/book/rankingList', $data);
     }
+    
+    public function catalog(BookService $bookService, ArticleService $articleService, $bookIdcode)
+    {
+        
+        $data = [];
+        
+        $book = $bookService->one($bookIdcode);
+        
+        if ($book['msg'] != 'success' or !$book['data'] ) {
+            return response()->view('mobile/global/404', $data, 404);
+        }
+        
+        $articles = $articleService->lsByBook($bookIdcode);
+        
+        $data['book'] = $book['data'];
+        $data['articles'] = $articles['data'];
+        
+        $data['title'] = $book['data']->name.'免费阅读-666看书_笔趣阁';
+        $data['keywords'] = sprintf(
+            '666看书、笔趣阁、书趣阁、最热最全完本小说、无广告无弹窗小说网、免费小说、VIP小说免费、%s最新章节、%s',
+            $book['data']->name,
+            $book['data']->author
+        );
+        $data['description'] = sprintf(
+            '%s的%s是一本%s小说，666看书提供%s最新章节免费阅读，666看书，全网最新最全热门小说，VIP小说免费阅读，无广告无弹窗绿色免费',
+            $book['data']->author,
+            $book['data']->name,
+            $book['data']->category,
+            $book['data']->name
+        );
+        
+        return view('mobile/book/catalog', $data);
+        
+    }
+    
+    
     
     public function search(Request $request, BookService $bookService)
     {

@@ -103,7 +103,6 @@
 				</ul>
 			</div>
 		</div>
-        <!--index_box1结束
-     18911325682 杨 -->
+        <!--index_box1结束 -->
 @endsection
 

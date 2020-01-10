@@ -10,8 +10,6 @@ use App\Service\CategoryService;
 class UserController extends Controller
 {
     
- 
-    
     public function myBookrack(CategoryService $categoryService, UserService $userService)
     {
         $userId = null;
@@ -31,9 +29,9 @@ class UserController extends Controller
         return view('www/user/mybookrack', $data);
         
     }
+    
     public function actionSetBookrack(Request $request, UserService $userService)
     {
-        
         
         $bookIdcode=  $request->input('book_idcode');
         

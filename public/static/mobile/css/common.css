@@ -1,8 +1,11 @@
 @CHARSET "UTF-8";
 
-
 .bgf6f7f9{
 	background:#f6f7f9
+}
+
+.text-969ba3{
+	color:#969ba3
 }
 
 .home-module{
@@ -10,7 +13,7 @@
 	
 }
 .module-title{
-    font-weight: 400;
+    font-weight:500;
 	font-size:1rem;
     color: #33373d;
 }
@@ -118,7 +121,15 @@
 	color: #969ba3!important;
 }
 
+.article-top{
+	background: url(../images/article_bg_1.jpg) no-repeat center top;
+    background-size: 100%;
+}
 
+.article-bg{
+	background: url(../images/article_bg_1.jpg) no-repeat center top,url(../images/article_bg_2.jpg) no-repeat center bottom,url(../images/article_bg_3.jpg) repeat-y center 119px;
+    background-size: 100%;
+}
 
 
 
