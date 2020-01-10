@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Service\BookService;
 use App\Service\ArticleService;
+use App\Service\RankinglistService;
 
 class BookController extends Controller
 {
@@ -43,6 +44,47 @@ class BookController extends Controller
         return view('mobile/book/index', $data);
     }
  
+    public function finished(BookService $bookService)
+    {
+        $data = [];
+        
+        $books = $bookService->lsFinished();
+        
+        $data['books'] = $books['data'];
+        
+        $data['title'] = '完本小说';
+        $data['keywords'] = '666看书、笔趣阁、书趣阁、最热最全完本小说、无广告无弹窗小说网、免费小说、VIP小说免费';
+        $data['description'] = '666看书，全网最新最全热门完本小说，VIP小说免费阅读，无广告无弹窗绿色免费';
+        
+        return view('mobile/book/finished', $data);
+    }
+    
+    public function rankingList( RankinglistService $rankinglistService)
+    {
+        $rankingClick     = $rankinglistService->lsClick();
+        $rankingRecommend = $rankinglistService->lsRecommend();
+        $rankingCollect   = $rankinglistService->lsCollect();
+        
+        $data = [];
+        $data['ranking_click']     = $rankingClick['data'];
+        $data['ranking_recommend'] = $rankingRecommend['data'];
+        $data['ranking_collect']   = $rankingCollect['data'];
+        $data['position'] = 'rankingList';
+        $data['title'] = '排行榜-666看书_笔趣阁';
+        $data['keywords'] = sprintf(
+            "666看书、笔趣阁、书趣阁、最热最全完本小说、无广告无弹窗小说网、免费小说、VIP小说免费、%d热门小说排行榜、%d热门小说排行榜",
+            date('Y')-1,
+            date('Y')
+        );
+        $data['description'] =  sprintf(
+            "666看书，全网最新最全热门小说，VIP小说免费阅读，无广告无弹窗绿色免费，小说排行榜,%d热门小说免费阅读,%d热门小说免费阅读，绿色无广告无弹窗",
+            date('Y')-1,
+            date('Y')
+        );
+        
+        return view('mobile/book/rankingList', $data);
+    }
+    
     public function search(Request $request, BookService $bookService)
     {
         $data = [];

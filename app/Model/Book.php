@@ -45,6 +45,17 @@ class Book extends Model
         
     }
     
+    
+    public static function countByCategory($categoryId)
+    {
+        $where = [
+            'is_del' => false,
+            'category_id' => $categoryId
+        ];
+        return self::where($where)->count();
+    }
+    
+    
     public static function lsFinished($pageNums = 12)
     {
         $where = [

@@ -7,11 +7,11 @@
 @section('description', $description)
 
 @section('top')
-	@include('mobile.global.top', ['position_name' => '', 'position' => 'search'])
+	@include('mobile.global.top', ['position_name' => '', 'position' => 'bookrack'])
 @endsection
 @section('content')
 	<div class="home-module px-2 pt-3">
-		<h5 class="module-title mb-3">{{ $keyword }} 搜索结果</h5>
+		<h5 class="module-title mb-3">我的书架</h5>
     	<ul class="list-unstyled">
     	@forelse( $books  as $book)
     		<a href="{{ route('m_book', ['idcode' => $book->id]) }}">
@@ -30,4 +30,3 @@
     	</ul>
     </div>
 @endsection
-

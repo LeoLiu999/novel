@@ -21,7 +21,7 @@ class CategoryController extends Controller
         $data = [];
         $data['categories'] = $categories['data'];
         
-        if ( !$category['data'] ) {
+        if ( $category['msg'] !== 'success' || !$category['data'] ) {
             return response()->view('www/global/404', $data, 404);
         }
         
@@ -45,18 +45,19 @@ class CategoryController extends Controller
             $category['data']->name
         );
         $data['keywords'] = sprintf(
-            "%s免费小说、%d%s热门小说排行、%d%s热门小说排行", 
-            $category['data']->name, 
-            date('Y')-1, 
-            $category['data']->name, 
-            date('Y'), 
-            $category['data']->name
-        );
-        $data['description'] =  sprintf(
-            "%s免费小说,%d%s热门小说免费阅读,%d%s热门小说免费阅读，绿色无广告无弹窗", 
+            "666看书、笔趣阁、书趣阁、最热最全完本小说、无广告无弹窗小说网、免费小说、VIP小说免费、%s免费小说、%d%s热门小说排行、%d%s热门小说排行",
             $category['data']->name,
             date('Y')-1,
-            $category['data']->name, 
+            $category['data']->name,
+            date('Y'),
+            $category['data']->name
+        );
+        
+        $data['description'] =  sprintf(
+            "666看书，全网最新最全热门小说，VIP小说免费阅读，无广告无弹窗绿色免费，666看书提供%s免费小说,%d%s热门小说免费阅读,%d%s热门小说免费阅读，绿色无广告无弹窗",
+            $category['data']->name,
+            date('Y')-1,
+            $category['data']->name,
             date('Y'),
             $category['data']->name
         );

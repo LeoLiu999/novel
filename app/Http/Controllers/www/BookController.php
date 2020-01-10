@@ -48,7 +48,7 @@ class BookController extends Controller
     }
  
     
-    public function finished(CategoryService $categoryService, BookService $bookService, ArticleService $articleService)
+    public function finished(CategoryService $categoryService, BookService $bookService)
     {
         
         $categories = $categoryService->ls();

@@ -14,7 +14,7 @@
 		<div class="col-3">
 		</div>
 		<div class="col-4 text-right">
-			<a href="#" class="btn  btn-outline-danger btn-sm " role="button">我的书架</a>
+			<a href="{{ route('m_bookrack') }}" class="btn  btn-outline-danger btn-sm " role="button">我的书架</a>
 		</div>
 	</div>
 @endsection
@@ -39,34 +39,13 @@
     </div>
 @endsection
 @section('search')
-    <form class="p-4" method="get" action="{{ route('m_search') }}">		
-    	<div class="input-group">
-          <input type="text" name="keyword" style="border:1px solid #fff" placeholder="作者、书名" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-danger" type="submit">搜索</button>
-              </div>
-        </div>
-    </form>
+    @include('mobile.global.searchform', ['position' => 'home'])
+@endsection
+@section('nav')	
+	@include('mobile.global.nav', ['position' => 'home'])
 @endsection
 @section('hot')
-	<div class="home-module px-3 pt-3 mt-3">
-		<h5 class="module-title mb-3">热门推荐</h5>
-		<ul class="list-inline  text-nowrap"  style="overflow-y: hidden;">
-			
-			@forelse($books_recommend as $b_re)
-    			<li class="list-inline-item align-top" style="width:5.25rem">
-    				<a href="{{ route('m_book', ['idcode' => $b_re->id  ] ) }}">
-        				<figure class="figure">
-        					<img style="height:112px" src="/storage{{ $b_re->cover }}" class="figure-img img-fluid rounded" alt="{{ $b_re->name }}">
-        					<figcaption class="figure-caption text-wrap text-dark">{{ $b_re->name }}</figcaption>
-        					<figcaption class="text-secondary text-wrap small">{{ $b_re->author }}</figcaption>
-        				</figure>
-    				</a>
-    			</li>
-			@empty
-			@endforelse
-		</ul>
-	</div>
+	@include('mobile.global.hot', ['position' => 'home'])
 @endsection
 
 @section('ranking')
@@ -97,7 +76,7 @@
     					<li class="list-inline-item align-top" style="width:5.25rem">
       						<a href="{{ route('m_book', ['idcode' => $click->id]) }}">
           						<figure class="figure">
-          							<img style="height:112px" src="/storage/{{$click->cover}}" class="figure-img img-fluid" alt="{{$click->name}}">
+          							<img src="/storage/{{$click->cover}}" class="figure-img img-fluid rounded book-cover" alt="{{$click->name}}">
           							<figcaption class="figure-caption text-wrap text-dark">{{$click->name}}</figcaption>
           							<figcaption class="text-secondary text-wrap small">{{$click->author}}</figcaption>
         						</figure>
@@ -111,7 +90,7 @@
       					<li class="list-inline-item align-top" style="width:5.25rem">
       						<a href="{{ route('m_book', ['idcode' => $recommend->id]) }}">
           						<figure class="figure">
-          							<img style="height:112px" src="/storage/{{$recommend->cover}}" class="figure-img img-fluid" alt="{{$recommend->name}}">
+          							<img src="/storage/{{$recommend->cover}}" class="figure-img img-fluid rounded book-cover" alt="{{$recommend->name}}">
           							<figcaption class="figure-caption text-wrap text-dark">{{$recommend->name}}</figcaption>
           							<figcaption class="text-secondary text-wrap small">{{$recommend->author}}</figcaption>
         						</figure>
@@ -125,7 +104,7 @@
       					<li class="list-inline-item align-top" style="width:5.25rem">
       						<a href="{{ route('m_book', ['idcode' => $collect->id]) }}">
           						<figure class="figure">
-          							<img style="height:112px" src="/storage/{{$collect->cover}}" class="figure-img img-fluid" alt="{{$collect->name}}">
+          							<img src="/storage/{{$collect->cover}}" class="figure-img img-fluid rounded book-cover" alt="{{$collect->name}}">
           							<figcaption class="figure-caption text-wrap text-dark">{{$collect->name}}</figcaption>
           							<figcaption class="text-secondary text-wrap small">{{$collect->author}}</figcaption>
         						</figure>
@@ -163,7 +142,7 @@
         				<li class="list-inline-item align-top" style="width:5.25rem">
         					<a href="{{ route('m_book', ['idcode' => $book->id  ] ) }}">
           						<figure class="figure">
-          							<img style="height:112px" src="/storage{{ $book->cover }}" class="figure-img img-fluid rounded" alt="{{ $book->name }}">
+          							<img src="/storage{{ $book->cover }}" class="figure-img img-fluid rounded book-cover" alt="{{ $book->name }}">
           							<figcaption class="figure-caption text-wrap text-dark">{{ $book->name }}</figcaption>
           							<figcaption class="text-secondary text-wrap small">{{ $book->author }}</figcaption>
         						</figure>
@@ -197,7 +176,7 @@
         				<li class="list-inline-item align-top" style="width:5.25rem">
         					<a href="{{ route('m_book', ['idcode' => $book->id  ] ) }}">
           						<figure class="figure">
-          							<img style="height:112px" src="/storage{{ $book->cover }}" class="figure-img img-fluid rounded" alt="{{ $book->name }}">
+          							<img src="/storage{{ $book->cover }}" class="figure-img img-fluid rounded book-cover" alt="{{ $book->name }}">
           							<figcaption class="figure-caption text-wrap text-dark">{{ $book->name }}</figcaption>
           							<figcaption class="text-secondary text-wrap small">{{ $book->author }}</figcaption>
         						</figure>
@@ -212,11 +191,3 @@
     	</div>
 	</div>
 @endsection
-@section('footer')
-	<div class="mt-3" style="height:30px">
-						
-	</div>
-@endsection
-
-
-

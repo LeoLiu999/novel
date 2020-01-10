@@ -43,6 +43,22 @@
     text-align: center;
 }
 
+.icon-home{
+	background-image: url(../images/icon.png);
+    background-size: 87px 87px;
+	background-position: -31px 0;
+    width: 28px;
+    height: 25px;
+}
+
+.icon-account{
+	background-image: url(../images/icon.png);
+    background-size: 87px 87px;
+	background-position: -63px 0;
+    width: 24px;
+    height: 24px;
+}
+
 .icon-category{
 	background-image: url(../images/icon.png);
     background-size: 87px 87px;
@@ -79,6 +95,29 @@
 .logo{
 	width:inherit;
 	height:1.25rem;
-	
-	
 }
+
+.book-cover{
+	height:7.2rem!important;
+}
+
+.book-desc{
+	line-height: 1.1875rem;
+    display: -webkit-box;
+    height: 3.42rem;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+	font-size: .875rem;
+    overflow: hidden;
+    color: #6c757d;
+}
+
+.text-969{
+	color: #969ba3!important;
+}
+
+
+
+
+
+

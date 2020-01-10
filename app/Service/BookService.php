@@ -43,10 +43,10 @@ class BookService extends BaseService
         
     }
     
-    public function lsRandRecommend($limit = 6)
+    public function lsRandRecommend($limit = 6, $categoryId = null)
     {
         $isRecommend = true;
-        $recommendList = $this->model::ls(null, $isRecommend, ['sort_weight', 'desc'], 100);
+        $recommendList = $this->model::ls($categoryId, $isRecommend, ['sort_weight', 'desc'], 100);
         
         if ( $recommendList->isEmpty() ) {
             return makeResult('success');
@@ -100,6 +100,15 @@ class BookService extends BaseService
         $books = $this->model::lsByCategory($categoryId);
         
         return makeResult('success', $books);
+        
+    }
+    
+    public function countByCategory($categoryId)
+    {
+        
+        $count = $this->model::countByCategory($categoryId);
+        
+        return makeResult('success', $count);
         
     }
     

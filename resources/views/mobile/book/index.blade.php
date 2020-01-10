@@ -7,5 +7,5 @@
 @section('description', $description)
 
 @section('content')
-	book
+	
 @endsection
