@@ -20,7 +20,7 @@ class BookController extends Controller
         
         $book = $bookService->one($idcode); 
                 
-        if ( $book['data'] != 'success' || !$book['data'] ) {
+        if ( $book['msg'] != 'success' || !$book['data'] ) {
             return response()->view('www/global/404', $data, 404);
         }
         
