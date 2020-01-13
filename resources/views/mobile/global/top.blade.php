@@ -1,6 +1,10 @@
 <div class="fixed-top">
     <nav class="navbar navbar-light bg-white border-bottom">
-    	<div onclick="history.back()">
+    	<!-- div   @if($position == 'catalog')  onclick="window.location.href = '{{ route('m_book', ['idcode' => $book_idcode])  }}'" @else onclick="history.back()" @endif >
+        	< 
+        </div -->
+        
+        <div onclick="history.back()">
         	< 
         </div>
         <div>

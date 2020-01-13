@@ -7,7 +7,7 @@
 @section('description', $description)
 
 @section('top')
-	@include('mobile.global.top', ['position_name' => '', 'position' => 'finished'])
+	@include('mobile.global.top', ['position_name' => '', 'position' => 'catalog',  'book_idcode' => $book->id ])
 @endsection
 
 

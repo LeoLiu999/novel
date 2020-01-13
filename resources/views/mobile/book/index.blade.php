@@ -55,7 +55,7 @@
 	
 	<div class="home-module px-3 pt-3 mt-3">
 		<h5 class="module-title mb-3">最新章节</h5>
-		@forelse(array_slice($articles->toArray(), -5) as $article)
+		@forelse(array_reverse(array_slice($articles->toArray(), -5)) as $article)
         	<a href="{{ route('m_article', ['idcode' => $article['id'], 'book_idcode' => $book->id]) }}" class="d-block text-dark">
             	<div class="row ml-3 p-3 border-top">
                     <div class="col-12 mt-2">
