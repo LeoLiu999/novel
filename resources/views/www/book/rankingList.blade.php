@@ -27,7 +27,7 @@
             				</div>
         				</div>
         				@else
-        					<span class="width50">if($b_n->rank == 2)<span class="rankBlock warning"> @elseif($b_n->rank == 3) <span class="rankBlock info">  @else <span class="rankBlock secondary"> @endif {{ $b_n->rank }}</span><a href="{{ route('book', ['idcode' => $b_n->id]) }}">{{ $b_n->name }}</a></span>
+        					<span class="width50">@if($b_n->rank == 2)<span class="rankBlock warning"> @elseif($b_n->rank == 3) <span class="rankBlock info">  @else <span class="rankBlock secondary"> @endif {{ $b_n->rank }}</span><a href="{{ route('book', ['idcode' => $b_n->id]) }}">{{ $b_n->name }}</a></span>
         					<span class="width20"><a href="{{ route('category', ['idcode' => $b_n->category_id]) }}">「{{ $b_n->category }}」</a></span>
         					<span class="width20 color999">{{ $b_n->author }}</span>
         				@endif
@@ -57,7 +57,7 @@
             				</div>
         				</div>
         				@else
-        					<span class="width50">if($b_n->rank == 2)<span class="rankBlock warning"> @elseif($b_n->rank == 3) <span class="rankBlock info">  @else <span class="rankBlock secondary"> @endif {{ $b_n->rank }}</span><a href="{{ route('book', ['idcode' => $b_n->id]) }}">{{ $b_n->name }}</a></span>
+        					<span class="width50">@if($b_n->rank == 2)<span class="rankBlock warning"> @elseif($b_n->rank == 3) <span class="rankBlock info">  @else <span class="rankBlock secondary"> @endif {{ $b_n->rank }}</span><a href="{{ route('book', ['idcode' => $b_n->id]) }}">{{ $b_n->name }}</a></span>
         					<span class="width20"><a href="{{ route('category', ['idcode' => $b_n->category_id]) }}">「{{ $b_n->category }}」</a></span>
         					<span class="width20 color999">{{ $b_n->author }}</span>
         				@endif
