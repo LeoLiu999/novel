@@ -22,7 +22,7 @@
         	<a href="{{ route('m_article', ['idcode' => $article->id, 'book_idcode' => $book->id]) }}" class="d-block text-dark">
             	<div class="row ml-3 p-3 border-top">
                     <div class="col-12 mt-2">
-                    @if ( $article->id == $already_read->id ) <button type="button" class="btn btn-info btn-sm mr-2">已读</button>@endif {{ $article->title }}
+                    @if ( $already_read &&  $article->id == $already_read->id ) <button type="button" class="btn btn-info btn-sm mr-2">已读</button>@endif {{ $article->title }}
                     </div>
               	</div>
           	</a>
@@ -36,7 +36,7 @@
         	<a href="{{ route('m_article', ['idcode' => $article['id'], 'book_idcode' => $book->id]) }}" class="d-block text-dark">
             	<div class="row ml-3 p-3 border-top">
                     <div class="col-12 mt-2">
-                    @if ( $article['id'] == $already_read->id ) <button type="button" class="btn btn-info btn-sm mr-2">已读</button>@endif {{ $article['title'] }}
+                    @if (  $already_read && $article['id'] == $already_read->id ) <button type="button" class="btn btn-info btn-sm mr-2">已读</button>@endif {{ $article['title'] }}
                     </div>
               	</div>
           	</a>
