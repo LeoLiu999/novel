@@ -3,22 +3,19 @@
 namespace App\Service;
 
 use App\Model\Book;
-use Illuminate\Support\Facades\Redis;
 use App\Model\Article;
 
 class BookService extends BaseService
 {
     protected $model;
     protected $articleModel;
+    protected $rankingListService;
     
-    protected static $rankListRedisKey = [
-        'recommend' => 'rankinglist_recommend'
-    ];
-    
-    public function __construct(Book $bookModel, Article $articleModel)
+    public function __construct(Book $bookModel, Article $articleModel, RankinglistService $rankingListService)
     {
         $this->model = $bookModel;
         $this->articleModel = $articleModel;
+        $this->rankingListService = $rankingListService;
     }
     
     public function ls($categoryId = null, $isRecommend = null, array $order = [], $limit = 8, $offset = 0)
@@ -38,6 +35,8 @@ class BookService extends BaseService
         }
         
         $one = $this->model::one($id);
+        
+        $this->rankingListService->setRankingList($id, 'click');
         
         return makeResult('success', $one);
         
@@ -119,12 +118,6 @@ class BookService extends BaseService
         return makeResult('success', $books);
     }
     
-    public function lsRankingList()
-    {
-        $books = [];
-        return makeResult('success', $books);
-    }
-    
     public function search($keyword)
     {
         
@@ -152,22 +145,7 @@ class BookService extends BaseService
             return makeResult('error_book');
         }  
         
-        $key = $this->buildRedisKey(__FUNCTION__);
-        
-        $set = Redis::zIncrBy($this->buildRedisKey(__FUNCTION__), 1, $book->id);
-        
-        if ( !$set ) {
-            return makeResult('error_recommend');
-        }
-        
-        return makeResult('success');
+        return $this->rankingListService->setRankingList($bookId, 'recommend');
     }
-    
-    
-    protected static function buildRedisKey($type)
-    {
-        return isset(self::$rankListRecommendRedisKey[$type]) ? self::$rankListRecommendRedisKey[$type] : false;
-    }
-    
     
 }

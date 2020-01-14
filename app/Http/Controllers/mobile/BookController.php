@@ -27,7 +27,7 @@ class BookController extends Controller
         $alreadyRead = $articleService->getAlreadyRead($idcode);
         
         $data['book'] = $book['data'];
-        $data['articles'] = $articles['data'];
+        $data['articles'] = $articles['data']['articles'];
         $data['already_read'] = $alreadyRead['data']; 
         
         $data['title'] = $book['data']->name.'免费阅读-666看书_笔趣阁';
@@ -67,9 +67,9 @@ class BookController extends Controller
     
     public function rankingList( RankinglistService $rankinglistService)
     {
-        $rankingClick     = $rankinglistService->lsClick();
-        $rankingRecommend = $rankinglistService->lsRecommend();
-        $rankingCollect   = $rankinglistService->lsCollect();
+        $rankingClick     = $rankinglistService->lsRankList('click');
+        $rankingRecommend = $rankinglistService->lsRankList('recommend');
+        $rankingCollect   = $rankinglistService->lsRankList('collect');
         
         $data = [];
         $data['ranking_click']     = $rankingClick['data'];
@@ -96,32 +96,34 @@ class BookController extends Controller
         
         $data = [];
         
-        $book = $bookService->one($bookIdcode);
+        $articles = $articleService->lsByBook($bookIdcode);
         
-        if ($book['msg'] != 'success' or !$book['data'] ) {
+        if ( $articles['msg'] != 'success' ) {
             return response()->view('mobile/global/404', $data, 404);
         }
         
-        $articles = $articleService->lsByBook($bookIdcode);
-        
         $alreadyRead = $articleService->getAlreadyRead($bookIdcode);
         
-        $data['book'] = $book['data'];
-        $data['articles'] = $articles['data'];
+        $data['book'] = $articles['data']['book'];
+        $data['articles'] = $articles['data']['articles'];
         $data['already_read'] = $alreadyRead['data'] ?? null;
         
-        $data['title'] = $book['data']->name.'免费阅读-666看书_笔趣阁';
+        $bookName = $articles['data']['book']->name;
+        $bookAuthor = $articles['data']['book']->author;
+        $bookCategory = $articles['data']['book']->category;
+        
+        $data['title'] = $bookName.'免费阅读-666看书_笔趣阁';
         $data['keywords'] = sprintf(
             '666看书、笔趣阁、书趣阁、最热最全完本小说、无广告无弹窗小说网、免费小说、VIP小说免费、%s最新章节、%s',
-            $book['data']->name,
-            $book['data']->author
+            $bookName,
+            $bookAuthor
         );
         $data['description'] = sprintf(
             '%s的%s是一本%s小说，666看书提供%s最新章节免费阅读，666看书，全网最新最全热门小说，VIP小说免费阅读，无广告无弹窗绿色免费',
-            $book['data']->author,
-            $book['data']->name,
-            $book['data']->category,
-            $book['data']->name
+            $bookAuthor,
+            $bookName,
+            $bookCategory,
+            $bookName
         );
         
         return view('mobile/book/catalog', $data);

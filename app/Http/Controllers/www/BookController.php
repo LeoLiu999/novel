@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Service\CategoryService;
 use App\Service\BookService;
 use App\Service\ArticleService;
+use App\Service\RankinglistService;
 
 class BookController extends Controller
 {
@@ -27,7 +28,7 @@ class BookController extends Controller
         $articles = $articleService->lsByBook($idcode);
         
         $data['book'] = $book['data'];
-        $data['articles'] = $articles['data'];
+        $data['articles'] = $articles['data']['articles'];
         $data['position'] = 'category_'.$book['data']->category_id;
         
         $data['title'] = $book['data']->name.'免费阅读-666看书_笔趣阁';
@@ -75,22 +76,25 @@ class BookController extends Controller
         return view('www/book/finished', $data);
     }
     
-    public function rankingList(CategoryService $categoryService, BookService $bookService)
+    public function rankingList(CategoryService $categoryService, RankinglistService $rankinglistService)
     {
         $categories = $categoryService->ls();
         
         $data = [];
         $data['categories'] = $categories['data'];
         
-        $books = $bookService->lsRankingList();
         
-        $data['books'] = $books['data'];
+        $rankingClick     = $rankinglistService->lsRankList('click');
+        $rankingRecommend = $rankinglistService->lsRankList('recommend');
+        $rankingCollect   = $rankinglistService->lsRankList('collect');
+        
+        $data['ranking_click']     = $rankingClick['data'];
+        $data['ranking_recommend'] = $rankingRecommend['data'];
+        $data['ranking_collect']   = $rankingCollect['data'];
         
         $data['position'] = 'rankingList';
         
-        
         $data['title'] = '排行榜';
-        
         $data['keywords'] = sprintf(
             "%d热门小说排行榜、%d热门小说排行榜",
             date('Y')-1,
@@ -100,8 +104,7 @@ class BookController extends Controller
             "小说排行榜,%d热门小说免费阅读,%d热门小说免费阅读，绿色无广告无弹窗",
             date('Y')-1,
             date('Y')
-       );
-        
+        );
         
         return view('www/book/rankingList', $data);
     }

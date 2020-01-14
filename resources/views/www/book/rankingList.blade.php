@@ -7,31 +7,97 @@
 @section('description', $description)
 
 @section('content')
-	  <div class="index_box1">
-            <div class="index_box1_left">
-                <div class="border-bottom2"><a class="block-a" href="javascript:void(0)">排行榜</a></div>
-                	@forelse( $books  as $book)
-	                <div class="box1_left_div left" onclick="location.href='{{ route('book', ['idcode' => $book->id  ] ) }}'">
-	                    <div class="box1_left_div_img left">
-	                    	<a href="{{ route('book', ['idcode' => $book->id  ] ) }}">
-	                       	<img src="/storage{{ $book->cover }}"  alt="{{ $book->name }}" title="{{ $book->name }}" />
-	                    	</a>
-	                    </div>
-	                    <div class="box1_left_div_content left">
-	                        <div class="box1_left_div_content_div" >
-	                        	<span><a href="{{ route('book', ['idcode' => $book->id  ] ) }}">{{ $book->name }}</a></span>
-	                        </div>
-	                        <div style="font-size:12px;" class="description overhide height120 lineheight20" title="{{ $book->name }}">
-	                        	<a style="font-size:12px;" href="{{ route('book', ['idcode' => $book->id  ] ) }}">{{ $book->description }}</a>
-	                        </div>
-	                        <div class="box1_left_div_content_div" >
-	                   			<span style="font-size:12px;color:#a6a6a6;font-weight:normal;">{{ $book->author }}</span>
-	                        </div>
-	                    </div>
-	                </div>
-	                @empty
-	                	赞无数据
-	               	@endforelse
-            </div>
-       </div>      
+<div class="index_box1">
+    <div class="left width30 new-book" style="margin-right:20px">
+    	<h3 class="wrap-title">点击榜</h3>
+    	<div>
+    		<ul>
+    			@forelse($ranking_click as $b_n)
+        			<li>
+        				@if($b_n->rank == 1)
+        				<div class="both overhide" style="padding:10px 0">
+        					<div class="left">
+        						<p><span class="rankBlock danger">NO.1</span> <a href="{{ route('book', ['idcode' => $b_n->id]) }}">{{ $b_n->name }}</a></p>
+        						<p><a href="{{ route('category', ['idcode' => $b_n->category_id]) }}">「{{ $b_n->category }}」</a><small class="color999">{{ $b_n->author }}</small></p>
+            				</div>
+            				<div class="right book-cover" >
+            					<a href="{{ route('book', ['idcode' => $b_n->id]) }}" class="link">
+            						<img src="/storage{{ $b_n->cover }}" />
+            					</a>
+            				</div>
+        				</div>
+        				@else
+        					<span class="width50">if($b_n->rank == 2)<span class="rankBlock warning"> @elseif($b_n->rank == 3) <span class="rankBlock info">  @else <span class="rankBlock secondary"> @endif {{ $b_n->rank }}</span><a href="{{ route('book', ['idcode' => $b_n->id]) }}">{{ $b_n->name }}</a></span>
+        					<span class="width20"><a href="{{ route('category', ['idcode' => $b_n->category_id]) }}">「{{ $b_n->category }}」</a></span>
+        					<span class="width20 color999">{{ $b_n->author }}</span>
+        				@endif
+        			</li>
+    			@empty
+    	      		赞无数据
+    	  		@endforelse
+    		</ul>
+    	</div>
+    </div>
+	<div class="left width30 new-book" style="margin-right:20px">
+    	<h3 class="wrap-title">推荐榜</h3>
+    	<div>
+    		<ul>
+    			@forelse($ranking_recommend as $b_n)
+        			<li>
+        				@if($b_n->rank == 1)
+        				<div class="both overhide" style="padding:10px 0">
+        					<div class="left">
+        						<p><span class="rankBlock danger">NO.1</span> <a href="{{ route('book', ['idcode' => $b_n->id]) }}">{{ $b_n->name }}</a></p>
+        						<p><a href="{{ route('category', ['idcode' => $b_n->category_id]) }}">「{{ $b_n->category }}」</a><small class="color999">{{ $b_n->author }}</small></p>
+            				</div>
+            				<div class="right book-cover" >
+            					<a href="{{ route('book', ['idcode' => $b_n->id]) }}" class="link">
+            						<img src="/storage{{ $b_n->cover }}" />
+            					</a>
+            				</div>
+        				</div>
+        				@else
+        					<span class="width50">if($b_n->rank == 2)<span class="rankBlock warning"> @elseif($b_n->rank == 3) <span class="rankBlock info">  @else <span class="rankBlock secondary"> @endif {{ $b_n->rank }}</span><a href="{{ route('book', ['idcode' => $b_n->id]) }}">{{ $b_n->name }}</a></span>
+        					<span class="width20"><a href="{{ route('category', ['idcode' => $b_n->category_id]) }}">「{{ $b_n->category }}」</a></span>
+        					<span class="width20 color999">{{ $b_n->author }}</span>
+        				@endif
+        			</li>
+    			@empty
+    	      		赞无数据
+    	  		@endforelse
+    		</ul>
+    	</div>
+    </div>
+	<div class="left width30 new-book">
+    	<h3 class="wrap-title">收藏榜</h3>
+    	<div>
+    		<ul>
+    			@forelse($ranking_collect as $b_n)
+        			<li>
+        				@if($b_n->rank == 1)
+        				<div class="both overhide" style="padding:10px 0">
+        					<div class="left">
+        						<p><span class="rankBlock danger">NO.1</span> <a href="{{ route('book', ['idcode' => $b_n->id]) }}">{{ $b_n->name }}</a></p>
+        						<p><a href="{{ route('category', ['idcode' => $b_n->category_id]) }}">「{{ $b_n->category }}」</a><small class="color999">{{ $b_n->author }}</small></p>
+            				</div>
+            				<div class="right book-cover" >
+            					<a href="{{ route('book', ['idcode' => $b_n->id]) }}" class="link">
+            						<img src="/storage{{ $b_n->cover }}" />
+            					</a>
+            				</div>
+        				</div>
+        				@else
+        					<span class="width50">@if($b_n->rank == 2)<span class="rankBlock warning"> @elseif($b_n->rank == 3) <span class="rankBlock info">  @else <span class="rankBlock secondary"> @endif {{ $b_n->rank }}</span><a href="{{ route('book', ['idcode' => $b_n->id]) }}">{{ $b_n->name }}</a></span>
+        					<span class="width20"><a href="{{ route('category', ['idcode' => $b_n->category_id]) }}">「{{ $b_n->category }}」</a></span>
+        					<span class="width20 color999">{{ $b_n->author }}</span>
+        				@endif
+        			</li>
+    			@empty
+    	      		赞无数据
+    	  		@endforelse
+    		</ul>
+    	</div>
+    </div>
+	
+ </div>
 @endsection

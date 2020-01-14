@@ -18,7 +18,7 @@ class ArticleService extends BaseService
     }
     
     
-    public function lsByBook( $bookIdcode)
+    public function lsByBook( $bookIdcode )
     {
         $bookId = $bookIdcode;
         
@@ -26,9 +26,19 @@ class ArticleService extends BaseService
             return makeResult('error_bookid');
         }
         
+        $book = $this->bookModel::one($bookId);
+        if ( !$book ) {
+            return makeResult('error_book');
+        }
+        
         $articles = $this->model::lsByBook( $bookId);
         
-        return makeResult('success', $articles);
+        $data = [
+            'articles' => $articles,
+            'book'     => $book
+        ];
+        
+        return makeResult('success', $data);
     }
     
     public function one($idcode, $bookIdcode)
@@ -172,10 +182,10 @@ class ArticleService extends BaseService
         }
         
         $articleId = $alreadyReadArticleIdcode;
+        $bookId    = $bookIdcode;
         
-        $article = $this->one($articleId, $bookIdcode);
-        
-        if ( $article['msg'] !== 'success' || !$article['data'] ) {
+        $article = $this->model::one($articleId, $bookId);
+        if ( !$article ) {
             return makeResult('error_article');
         }
         

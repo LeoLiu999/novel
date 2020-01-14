@@ -10,10 +10,12 @@ class UserService extends BaseService
 {
     protected $bookModel;
     protected $myBookrackCookieName = 'Cookie_MyBookrackCookie';
+    protected $rankingListService;
     
-    public function __construct(Book $bookModel)
+    public function __construct(Book $bookModel, RankinglistService $rankingListService)
     {
         $this->bookModel = $bookModel;
+        $this->rankingListService = $rankingListService;
     }
     
     public function setMyBookrack($userId, $bookIdcode)
@@ -36,6 +38,8 @@ class UserService extends BaseService
                 $bookIdcode => ['book_idcode' => $bookIdcode]
             ]
         );
+        
+        $this->rankingListService->setRankingList($bookId, 'collect');
         
         return makeResult('success');
     }

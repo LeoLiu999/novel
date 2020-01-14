@@ -4,67 +4,41 @@ namespace App\Service;
 
 use App\Service\BaseService;
 use App\Model\Book;
+use Illuminate\Support\Facades\Redis;
 
 class RankinglistService extends BaseService{
     
     protected $bookModel;
+    protected static $rankListRedisKey = [
+        'recommend' => 'rankinglist_recommend',
+        'click'     => 'rankinglist_click',
+        'collect'   => 'rankinglist_collect'
+    ];
     
     public function __construct(Book $bookModel)
     {
         $this->bookModel = $bookModel;
     }
     
-    
-    public function lsCollect()
+    public function lsRankList($type, $start = 0, $stop = 30)
     {
+        $list = $this->getRankingList($type, $start, $stop);
         
-        $list = [
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-        ];
-        $data = [];
-        foreach ($list as $bookId) {
-            
-            $book = $this->bookModel->one($bookId);
-            
-            if ( !$book ) {
-                continue;
-            }
-            
-            $data[] = $book;
+        if( $list['msg'] !== 'success' || !$list['data'] ) {
+            return $list;
         }
         
-        return makeResult('success', $data);
-        
-    }
-    
-    
-    public function lsClick()
-    {
-        $list = [
-            9,
-            10,
-            11,
-            12,
-            13,
-            14,
-            15,
-            16,
-        ];
         $data = [];
-        foreach ($list as $bookId) {
-            
+        foreach ($list['data'] as $bookId => $score) {
+            $start++;
             $book = $this->bookModel->one($bookId);
             
             if ( !$book ) {
                 continue;
             }
+            
+            $book['score'] = $score;
+            $book['rank'] = $start;
             
             $data[] = $book;
         }
@@ -72,31 +46,41 @@ class RankinglistService extends BaseService{
         return makeResult('success', $data);
     }
     
-    public function lsRecommend()
+    public function setRankingList($bookId, $type)
     {
-        $list = [
-            17,
-            18,
-            19,
-            20,
-            21,
-            22,
-            23,
-            24,
-        ];
-        $data = [];
-        foreach ($list as $bookId) {
-            
-            $book = $this->bookModel->one($bookId);
-            
-            if ( !$book ) {
-                continue;
-            }
-            
-            $data[] = $book;
+        
+        $key = $this->buildRedisKey($type);
+        
+        if ( !$key ) {
+            return makeResult('error_type');
         }
         
-        return makeResult('success', $data);
+        if ( Redis::zIncrBy($key, 1, $bookId) ) {
+            return makeResult('success');
+        }
+        
+        return makeResult('error_set');
+        
+    }
+    
+    protected function getRankingList($type, $start = 0, $stop = 20)
+    {
+        $key = $this->buildRedisKey($type);
+        
+        if ( !$key ) {
+            return makeResult('error_type');
+        }
+        
+        $list = Redis::zRevRange($key, $start, $stop, true);
+        
+        return makeResult('success', $list);
+    }
+    
+    
+    protected function buildRedisKey($type)
+    {
+        $type = strtolower($type);
+        return isset(self::$rankListRedisKey[$type]) ? self::$rankListRedisKey[$type] : false;
     }
     
 }

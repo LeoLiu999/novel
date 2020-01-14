@@ -39,7 +39,7 @@
                   <li class="media mb-3">
                         <img class="mr-3 book-cover rounded" src="/storage{{ $click->cover }}" alt="{{ $click->name }}">
                         <div class="media-body">
-                          <h5 class="mt-0 mb-1 text-dark ">{{ $click->name }}</h5>
+                          <h5 class="mt-0 mb-1 text-dark ">@if ( $click->rank == 1 ) <span class="badge badge-danger">No. @elseif($click->rank == 2) <span class="badge badge-warning"> @elseif($click->rank == 3) <span class="badge badge-info"> @else <span class="badge badge-secondary"> @endif {{ $click->rank }}</span> {{ $click->name }}</h5>
                           <p class="book-desc">{{ $click->description }}</p>
                           <p><small class="float-left text-969">{{ $click->author }}</small><small class="float-right text-969">{{ $click->category }}</small></p>
                         </div>
@@ -56,7 +56,7 @@
                   <li class="media mb-3">
                         <img class="mr-3 book-cover rounded" src="/storage{{ $recommend->cover }}" alt="{{ $recommend->name }}">
                         <div class="media-body">
-                          <h5 class="mt-0 mb-1 text-dark ">{{ $recommend->name }}</h5>
+                          <h5 class="mt-0 mb-1 text-dark ">@if ( $recommend->rank == 1 ) <span class="badge badge-danger">No. @elseif($recommend->rank == 2) <span class="badge badge-warning"> @elseif($recommend->rank == 3) <span class="badge badge-info"> @else <span class="badge badge-secondary"> @endif {{ $recommend->rank }}</span> {{ $recommend->name }}</h5>
                           <p class="book-desc">{{ $recommend->description }}</p>
                           <p><small class="float-left text-969">{{ $recommend->author }}</small><small class="float-right text-969">{{ $recommend->category }}</small></p>
                         </div>
@@ -72,7 +72,7 @@
                   <li class="media mb-3">
                         <img class="mr-3 book-cover rounded" src="/storage{{ $collect->cover }}" alt="{{ $collect->name }}">
                         <div class="media-body">
-                          <h5 class="mt-0 mb-1 text-dark ">{{ $collect->name }}</h5>
+                          <h5 class="mt-0 mb-1 text-dark ">@if ( $collect->rank == 1 ) <span class="badge badge-danger">No. @elseif($collect->rank == 2) <span class="badge badge-warning"> @elseif($collect->rank == 3) <span class="badge badge-info"> @else <span class="badge badge-secondary"> @endif {{ $collect->rank }}</span> {{ $collect->name }}</h5>
                           <p class="book-desc">{{ $collect->description }}</p>
                           <p><small class="float-left text-969">{{ $collect->author }}</small><small class="float-right text-969">{{ $collect->category }}</small></p>
                         </div>

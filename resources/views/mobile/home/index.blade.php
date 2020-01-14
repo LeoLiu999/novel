@@ -52,7 +52,7 @@
 
 @section('ranking')
 	<div class="home-module px-3 pt-3 mt-3">
-    			<h5 class="module-title mb-3">排行榜</h5>
+    			<h5 class="module-title mb-3">排行榜<a href="{{ route('m_rankingList') }}" class="float-right" style="color:#969ba3">更多 ></a></h5>
     			<div class="mb-3">
     				<div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
                       <label class="btn btn-outline-danger btn-sm active">

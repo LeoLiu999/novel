@@ -41,9 +41,9 @@ class HomeController extends Controller
         
         $randRecommendList = $bookService->lsRandRecommend(8);
         
-        $rankingClick     = $rankinglistService->lsClick();
-        $rankingRecommend = $rankinglistService->lsRecommend();
-        $rankingCollect   = $rankinglistService->lsCollect();
+        $rankingClick     = $rankinglistService->lsRankList('click', 0, 8);
+        $rankingRecommend = $rankinglistService->lsRankList('recommend', 0, 8);
+        $rankingCollect   = $rankinglistService->lsRankList('collect', 0, 8);
         
         $banners = $bannerService->ls();
         
