@@ -39,37 +39,48 @@
         			})
         			
         		})*/
-        	</script>
-        	 <script>
+            if ((navigator.userAgent.match(/(MicroMessenger|iPhone|iPod|ios|iPad|Android)/i))) {
+                var url = document.location.toString();
+                var arrUrl = url.split("//");
+                var start = arrUrl[1].indexOf("/");
+                var relUrl = arrUrl[1].substring(start);
 
-					function joinBookrack(bookid)
-					{
-						DoAjax.getResponse({
-							'url' : "{{ route('setBookrack') }}",
-							'method' : 'post',
-							'headers' : {
-								'X-CSRF-TOKEN' : '{{ csrf_token() }}'
-							},
-							'params' : {
-								'book_idcode' : bookid
-							},
-							
-	                   	});
-					}
-                	function recommend(bookid){
-                		DoAjax.getResponse({
-							'url' : "{{ route('recommend') }}",
-							'method' : 'post',
-							'headers' : {
-								'X-CSRF-TOKEN' : '{{ csrf_token() }}'
-							},
-							'params' : {
-								'book_idcode' : bookid
-							},
-							
-	                   	});
-                    }
-                </script>
+				var mobileSite = 'http://m.666kanshu.com';
+				
+                @if ( App::environment('local') )
+                	mobileSite = 'http://m.novel.local';
+                @endif
+                window.location.href = mobileSite+relUrl;
+            }
+
+			function joinBookrack(bookid)
+			{
+				DoAjax.getResponse({
+					'url' : "{{ route('setBookrack') }}",
+					'method' : 'post',
+					'headers' : {
+						'X-CSRF-TOKEN' : '{{ csrf_token() }}'
+					},
+					'params' : {
+						'book_idcode' : bookid
+					},
+					
+               	});
+			}
+        	function recommend(bookid){
+        		DoAjax.getResponse({
+					'url' : "{{ route('recommend') }}",
+					'method' : 'post',
+					'headers' : {
+						'X-CSRF-TOKEN' : '{{ csrf_token() }}'
+					},
+					'params' : {
+						'book_idcode' : bookid
+					},
+					
+               	});
+            }
+        </script>
     </head>
     <body>	
     <!--index_top_h1开始-->
