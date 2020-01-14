@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Model\Article;
 use App\Model\Book;
+use Illuminate\Support\Facades\Cookie;
 
 class ArticleService extends BaseService
 {
@@ -155,6 +156,30 @@ class ArticleService extends BaseService
         
     }
     
-   
+    public function setAlreadyRead($bookIdcode, $articleIdcode)
+    {
+        $key = 'already_read_book:'.$bookIdcode;
+        return Cookie::queue($key, $articleIdcode, 3600*24*10000);
+    }
+    
+    public function getAlreadyRead($bookIdcode)
+    {
+        $key = 'already_read_book:'.$bookIdcode;
+        $alreadyReadArticleIdcode = Cookie::get($key);
+        
+        if ( !$alreadyReadArticleIdcode ) {
+            return makeResult('success');
+        }
+        
+        $articleId = $alreadyReadArticleIdcode;
+        
+        $article = $this->one($articleId, $bookIdcode);
+        
+        if ( $article['msg'] !== 'success' || !$article['data'] ) {
+            return makeResult('error_article');
+        }
+        
+        return makeResult('success', $article['data']);
+    }
     
 }

@@ -42,6 +42,8 @@ class ArticleController extends Controller
             $article['data']->book->name
         );
         
+        $articleService->setAlreadyRead($bookIdcode, $idcode);
+        
         return view('mobile/article/index', $data);
     }
     

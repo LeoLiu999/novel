@@ -38,9 +38,11 @@
     		<div class="col"><button type="button" class="btn btn-outline-success btn-sm" onclick="recommend('{{ $book->id }}')">推荐本书</button></div>
     	</div>
 	</div>
+	@if ( $already_read )
 	<div class="py-2 px-3 bg-white border-top">
-		<a href="#" class="text-info"><button type="button" class="btn btn-info btn-sm mr-2">已读</button>第100章</a>
+		<a href="{{ route('m_article', ['idcode' => $already_read->id, 'book_idcode' => $book->id]) }}" class="text-info"><button type="button" class="btn btn-info btn-sm mr-2">已读</button>{{ $already_read->title }}</a>
 	</div>
+	@endif
 	<div class="p-3 bg-white border-top border-bottom">
 		{{ $book->description }}
 	</div>

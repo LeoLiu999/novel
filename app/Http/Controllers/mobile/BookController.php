@@ -24,8 +24,11 @@ class BookController extends Controller
         
         $articles = $articleService->lsByBook($idcode);
         
+        $alreadyRead = $articleService->getAlreadyRead($idcode);
+        
         $data['book'] = $book['data'];
         $data['articles'] = $articles['data'];
+        $data['already_read'] = $alreadyRead['data']; 
         
         $data['title'] = $book['data']->name.'免费阅读-666看书_笔趣阁';
         $data['keywords'] = sprintf(
@@ -101,8 +104,11 @@ class BookController extends Controller
         
         $articles = $articleService->lsByBook($bookIdcode);
         
+        $alreadyRead = $articleService->getAlreadyRead($bookIdcode);
+        
         $data['book'] = $book['data'];
         $data['articles'] = $articles['data'];
+        $data['already_read'] = $alreadyRead['data'] ?? null;
         
         $data['title'] = $book['data']->name.'免费阅读-666看书_笔趣阁';
         $data['keywords'] = sprintf(
