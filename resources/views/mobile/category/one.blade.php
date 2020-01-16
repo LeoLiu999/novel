@@ -37,6 +37,7 @@
                         speed: 20,
                         invert: false
                     },
+                    click:true,
                     useTransition:false  // 防止iphone微信滑动卡顿
                 });
                 function setContent(content){
