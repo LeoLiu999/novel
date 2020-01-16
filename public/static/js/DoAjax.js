@@ -52,6 +52,12 @@ var DoAjax = new function (){
 			this.requestHeaders = params.headers
 		}
 		
+		if (typeof(params.loading) == 'function' ) {
+			this.loading = params.loading
+		}
+		if ( typeof(params.success) == 'function' ) {
+			this.success = params.success;
+		}
 	}
 	
 	this.request = function()
@@ -101,19 +107,21 @@ var DoAjax = new function (){
 	
 	this.loading = function()
 	{
-		
+		console.log('loading');
 	}
 	
 	this.success = function(data)
 	{
 		this.enAbled();
-		
+		if ( typeof(this.params.success) == 'function' ) {
+			this.params.success(data);
+			return;
+		} 
 		if( data.code == 200){
 			alert('操作成功');
 		} else {
 			alert(data.msg);
-		}		
-		
+		}	
 	}
 	
 	this.error = function()

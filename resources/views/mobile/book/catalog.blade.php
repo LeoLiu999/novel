@@ -17,7 +17,7 @@
     		<button type="button"  id="sort" attr-data="desc"  class="float-right btn btn-link text-dark" style="font-size:1.1rem">倒序</button>
 	</div>
 	<div class="home-module px-3 pt-3" id="asc-div">
-		<h5 class="module-title mb-3">{{ $book->name }}<small class="ml-1">共{{ $articles->count() }}章</small></h5>
+		<h5 class="module-title mb-3"><a class="text-dark" href="{{ route('m_book', ['idcode' => $book->id]) }}">{{ $book->name }}</a><small class="ml-1">共{{ $articles->count() }}章</small></h5>
 		@forelse($articles as $article)
         	<a href="{{ route('m_article', ['idcode' => $article->id, 'book_idcode' => $book->id]) }}" class="d-block text-dark">
             	<div class="row ml-3 p-3 border-top">

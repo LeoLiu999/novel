@@ -185,11 +185,12 @@ class ArticleService extends BaseService
         $bookId    = $bookIdcode;
         
         $article = $this->model::one($articleId, $bookId);
+        
         if ( !$article ) {
             return makeResult('error_article');
         }
         
-        return makeResult('success', $article['data']);
+        return makeResult('success', $article);
     }
     
 }

@@ -4,12 +4,12 @@ namespace App\Http\Controllers\mobile;
 
 use App\Http\Controllers\Controller;
 use App\Service\ArticleService;
-use App\Service\BookService;
+use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
     
-    public function index(BookService $bookService,  ArticleService $articleService, $idcode, $bookIdcode)
+    public function index(ArticleService $articleService, $idcode, $bookIdcode)
     {
         
         $data = [];
@@ -45,6 +45,43 @@ class ArticleController extends Controller
         $articleService->setAlreadyRead($bookIdcode, $idcode);
         
         return view('mobile/article/index', $data);
+    }
+    
+    public function actionGetArticle(Request $request, ArticleService $articleService)
+    {
+        
+        $data = [];
+        
+        $idcode = $request->query('idcode');
+        $bookIdcode = $request->query('book_idcode');
+        
+        $article = $articleService->one($idcode, $bookIdcode);
+        
+        if ($article['msg'] != 'success' or !$article['data'] ) {
+            
+            $data['code'] = '400';
+        } else{
+            
+            $articleService->setAlreadyRead($bookIdcode, $idcode);
+            
+            $prevArticle = $articleService->prevOne($article['data']->id, $article['data']->book_id);
+            
+            $nextArticle = $articleService->nextOne($article['data']->id, $article['data']->book_id);
+            
+            
+            $response['article']['id'] = $article['data']->id;
+            $response['article']['title'] = $article['data']->title;
+            $response['article']['content'] = $article['data']->content;
+            
+            $response['prev']['id'] = $prevArticle['data'] ? $prevArticle['data']->id : 'empty'; 
+            $response['next']['id'] = $nextArticle['data'] ? $nextArticle['data']->id : 'empty';
+            
+            $data['code'] = 200;
+            $data['data'] = $response;
+        }
+        
+        return response()->json($data);
+        
     }
     
 }

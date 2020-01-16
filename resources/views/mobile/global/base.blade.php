@@ -13,7 +13,7 @@
         <link rel="shortcut icon" type="image/x-icon" href="/favicon_48x48.ico">
         <script type="text/javascript" src="/static/js/jquery-3.4.1.min.js"></script>
         <script type="text/javascript" src="/static/bootstrap-4.4.1/js/bootstrap.min.js"></script>
-    	<script type="text/javascript" src="/static/js/DoAjax.js?v=2"></script>
+    	<script type="text/javascript" src="/static/js/DoAjax.js?v=5"></script>
     	<script>
 			function joinBookrack(bookid)
 			{
@@ -45,7 +45,6 @@
        </script>
     </head>
     <body class="bgf6f7f9">	
-    	
     	<div class="container-fluid" style="padding-right:0;padding-left:0;"> 
     		@yield('header')
     		@yield('top')
@@ -59,5 +58,4 @@
     		@yield('footer')
 		</div>
 	</body>
-    
 </html>
