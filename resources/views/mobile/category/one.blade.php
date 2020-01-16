@@ -10,14 +10,14 @@
 	@include('mobile.global.top', ['position_name' => '', 'position' => 'category'])
 @endsection
 	@section('content')
-			<div class="wrapper" style="height:98vh">
+			<div class="wrapper" style="height:97vh">
 				<div style="min-height:100vh">
     				@include('mobile.global.hot', ['position' => 'category'])
                 	<div class="home-module px-2 pt-3">
             			<h5 class="module-title mb-3">{{ $category->name }}</h5>
             			<ul class="list-unstyled content-box">
                 		</ul>
-                		<div class="text-center text-969 loading-box" style="height:200px">上拉加载更多</div>
+                		<div class="text-center text-969 loading-box" style="">上拉加载更多</div>
                     </div>
             	</div>
             </div>
