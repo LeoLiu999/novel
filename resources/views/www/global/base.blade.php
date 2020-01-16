@@ -86,7 +86,7 @@
     <!--index_top_h1开始-->
     <div class="index_top_h1">
         <div class="top_h1_content" id="top_h1_content" style="text-align:center">
-        您好，欢迎来到666看书免费小说网
+        您好，欢迎来到666看书免费小说网,网站移动端网址为m.666kanshu.com
         </div>
     </div>
     <!--index_top_h2开始-->
