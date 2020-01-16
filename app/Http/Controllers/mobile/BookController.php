@@ -51,12 +51,9 @@ class BookController extends Controller
     {
         $data = [];
         
-        $books = $bookService->lsFinished();
         
         $randRecommendList = $bookService->lsRandRecommend(8);
         $data['books_recommend']   = $randRecommendList['data'];
-        
-        $data['books'] = $books['data'];
         
         $data['title'] = '完本小说-666看书_笔趣阁';
         $data['keywords'] = '666看书、笔趣阁、书趣阁、最热最全完本小说、无广告无弹窗小说网、免费小说、VIP小说免费';
@@ -185,5 +182,18 @@ class BookController extends Controller
         
         return view('mobile/global/books', $data);
     }
+    
+    public function actionGetFinish(BookService $bookService)
+    {
+        
+        $books = $bookService->lsFinished();
+        if( $books['data']->isEmpty() ) {
+            exit('empty');
+        }
+        $data['books'] = $books['data'];
+        
+        return view('mobile/global/books', $data);
+    }
+    
     
 }

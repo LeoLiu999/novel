@@ -73,6 +73,7 @@ Route::domain($mobileSite)->namespace('mobile')->group(function(){
     
     Route::get('actionGetArticle', 'ArticleController@actionGetArticle')->name('m_actionGetArticle');
     Route::get('actionGetBooksByCategory', 'BookController@actionGetBooksByCategory')->name('m_actionGetBooksByCategory');
+    Route::get('m_actionGetFinish', 'BookController@actionGetFinish')->name('m_actionGetFinish');
     
     Route::post('users/actionSetBookrack', 'UserController@actionSetBookrack')->name('m_setBookrack');
     
