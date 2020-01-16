@@ -70,8 +70,8 @@
 				loadList();
                 oScroll.on("pullingUp",function(){
                     loadList();
-                    oScroll.refresh();
                     oScroll.finishPullUp();//可以多次执行上拉刷新
+                    oScroll.refresh();
                 });
                
             </script>
