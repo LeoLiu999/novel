@@ -104,6 +104,7 @@
        	});		
         
         oScroll.finishPullUp();//可以多次执行上拉刷新
+        oScroll.refresh();
     });
     @else
     	setMsg('已阅读完所有章节');
@@ -141,9 +142,10 @@
             	}
            	});		
             oScroll.finishPullDown();//可以多次执行上拉刷新
+            oScroll.refresh();
         });
  	@endif
-    oScroll.refresh();
+    
     
 </script>
 @endsection
