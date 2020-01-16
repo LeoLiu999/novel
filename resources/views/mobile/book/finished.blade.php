@@ -11,16 +11,18 @@
 @endsection
 
 @section('content')
-    <div class="wrapper" style="height:97vh">
-		<div style="min-height:100vh">
-			@include('mobile.global.hot', ['position' => 'finish'])
-        	<div class="home-module px-2 pt-3">
-        			<h5 class="module-title mb-3">完本</h5>
-        			<ul class="list-unstyled content-box">
-            		</ul>
-            		<div class="text-center text-969 loading-box" style="">上拉加载更多</div>
-            </div>
-    	</div>
+	<div class="bg-white" style="height:100vh">
+        <div class="wrapper" style="height:65vh">
+    		<div style="min-height:100vh">
+    			@include('mobile.global.hot', ['position' => 'finish'])
+            	<div class="home-module px-2 pt-3">
+            			<h5 class="module-title mb-3">完本</h5>
+            			<ul class="list-unstyled content-box">
+                		</ul>
+                		<div class="text-center text-969 loading-box" style="">上拉加载更多</div>
+                </div>
+        	</div>
+        </div>
     </div>
     <script type="text/javascript" src="/static/js/better-scroll-1.15.2.min.js"></script>
             <script type="text/javascript">
