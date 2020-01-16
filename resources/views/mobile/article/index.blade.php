@@ -7,7 +7,7 @@
 @section('description', $description)
 
 @section('content')
-		<div class="article-top fixed-top px-3 py-2"><a href="{{ route('m_bookCatalog', ['book_idcode' => $article->book_id]) }}" style="color:rgba(0,0,0,.4);" class="mr-2"><目录 </a><small style="color:rgba(0,0,0,.4);font-size:1rem" class="top-title">{{$article->title}}</small></div>
+		<div class="article-top fixed-top px-3 py-2"><a href="{{ route('m_bookCatalog', ['book_idcode' => $article->book_id]) }}" style="color:rgba(0,0,0,.4);" class="mr-2">< 目录 </a><small style="color:rgba(0,0,0,.4);font-size:1rem" class="top-title">{{$article->title}}</small></div>
 		<div class="article-bg" style="height:100vh;">
     		<div class="wrapper" style="height:98vh;">
         		<div class="px-3" style="padding-top:3.2rem;min-height:100vh;">

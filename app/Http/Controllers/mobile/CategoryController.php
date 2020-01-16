@@ -107,9 +107,6 @@ class CategoryController extends Controller
             $category['data']->name
         );
         
-        $books = $bookService->lsByCategory($category['data']->id);
-        $data['books'] = $books['data'];
-        
         $randRecommendList = $bookService->lsRandRecommend(8, $category['data']->id);
         $data['books_recommend']   = $randRecommendList['data'];
         
@@ -117,6 +114,5 @@ class CategoryController extends Controller
         
         return view('mobile/category/one', $data);
     }
-    
     
 }

@@ -93,8 +93,14 @@ class BookService extends BaseService
     }
     
     
-    public function lsByCategory($categoryId)
+    public function lsByCategory($categoryIdCode)
     {
+        
+        $categoryId = $categoryIdCode;
+        
+        if( !is_id($categoryId) ) {
+            return makeResult('error_category');
+        }
         
         $books = $this->model::lsByCategory($categoryId);
         
@@ -118,14 +124,14 @@ class BookService extends BaseService
         return makeResult('success', $books);
     }
     
-    public function search($keyword)
+    public function search($keyword, $limit = 12)
     {
         
         if ( !$keyword ) {
             return makeResult('error_keyword');
         }
         
-        $books = $this->model::search($keyword);
+        $books = $this->model::search($keyword, $limit);
         
         return makeResult('success', $books);
     }

@@ -138,7 +138,7 @@ class BookController extends Controller
         
         $keyword = $request->input('keyword');
         
-        $books = $bookService->search($keyword);
+        $books = $bookService->search($keyword, 1000);
         
         $data['books'] = $books['data'];
         $data['keyword'] = $keyword;
@@ -170,7 +170,20 @@ class BookController extends Controller
             
         }
        
+    }
+    
+    public function actionGetBooksByCategory(Request $request, BookService $bookService)
+    {
         
+        $categoryIdcode = $request->input('category_idcode');
+        
+        $books = $bookService->lsByCategory($categoryIdcode);
+        if( $books['data']->isEmpty() ) {
+            exit('empty');
+        }
+        $data['books'] = $books['data'];
+        
+        return view('mobile/global/books', $data);
     }
     
 }

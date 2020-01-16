@@ -126,8 +126,6 @@ class Book extends Model
             'is_del' => false,
         ];
         
-        
-        
         $order = ['sort_weight', 'desc'];
         
         return  self::where($where)
