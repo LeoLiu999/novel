@@ -62,6 +62,7 @@
                             } else {
                             	this.enAbled()
                             	setContent(data)
+                            	setMsg('上拉加载更多')
                         	    page++
                             }
                     	}
