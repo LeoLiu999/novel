@@ -40,7 +40,7 @@
 	</div>
 	@if ( $already_read )
 	<div class="py-2 px-3 bg-white border-top">
-		<a href="{{ route('m_article', ['idcode' => $already_read->id, 'book_idcode' => $book->id]) }}" class="text-info"><button type="button" class="btn btn-info btn-sm mr-2">已读</button>{{ $already_read->title }}</a>
+		<a class="d-block" href="{{ route('m_article', ['idcode' => $already_read->id, 'book_idcode' => $book->id]) }}" class="text-info"><button type="button" class="btn btn-info btn-sm mr-2">已读</button>{{ $already_read->title }}</a>
 	</div>
 	@endif
 	<div class="p-3 bg-white border-top border-bottom">

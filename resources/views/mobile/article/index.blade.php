@@ -113,7 +113,7 @@
 		prev_article_idcode= {{ $prev_article->id }}
 		setTopMsg('下拉加载上一章')
         oScroll.on("pullingDown",function(){
-        	if( next_article_idcode == 'empty' ) {
+        	if( prev_article_idcode == 'empty' ) {
             	setTopMsg('没有上一章了');
     			return;
             }
