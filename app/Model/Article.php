@@ -136,4 +136,39 @@ class Article extends Model
     }
     
     
+    public static function lsRepeat($hash){
+        
+        $where['origin_site'] = 'shuquge';
+        return self::suffix(self::buildSuffix($hash))
+        ->where($where)
+        ->select(
+            'relation_flag'
+        )
+        ->groupBy('relation_flag')
+        ->havingRaw('count(relation_flag) > ?', [1])
+        ->get();
+    } 
+    
+    public static function getRepeatMinId($hash, $relationFlag)
+    {
+        $where['origin_site'] = 'shuquge';
+        $where['relation_flag'] = $relationFlag;
+        return self::suffix(self::buildSuffix($hash))
+        ->where($where)
+        ->min('id');
+    }
+    
+    public static function deleteRepeatExceptId($hash, $relationFlag, $id)
+    {
+        $where = [
+            ['origin_site', '=', 'shuquge'],
+            ['relation_flag', '=', $relationFlag],
+            ['id', '<>', $id]
+        ];
+        
+        return self::suffix(self::buildSuffix($hash))
+        ->where($where)
+        ->delete();
+        
+    }
 }

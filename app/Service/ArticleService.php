@@ -193,4 +193,42 @@ class ArticleService extends BaseService
         return makeResult('success', $article);
     }
     
+    
+    public function deleteRepeat()
+    {
+        
+        $hashTableArr = range(1, 30);
+        
+        foreach ($hashTableArr as $hash) {
+            $repeatArticles = $this->model::lsRepeat($hash);
+            
+            if ( $repeatArticles->isEmpty() ) {
+                continue;
+            }
+            
+            foreach ($repeatArticles as $article) {
+                
+                $minId = $this->model::getRepeatMinId($hash, $article->relation_flag);
+                
+                if ( $minId ) {
+                    $delete = $this->model::deleteRepeatExceptId($hash, $article->relation_flag, $minId);
+                    
+                    if ( $delete ) {
+                        echo sprintf("success:delete articles_%d relation_flag = %s".PHP_EOL, $hash, $article->relation_flag);
+                    } else {
+                        echo sprintf("error:delete articles_%d relation_flag = %s".PHP_EOL, $hash, $article->relation_flag);
+                    }
+                
+                
+                }
+                
+            }
+            
+        } 
+        
+        
+    }
+    
+    
+    
 }

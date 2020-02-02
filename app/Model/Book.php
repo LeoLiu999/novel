@@ -130,8 +130,8 @@ class Book extends Model
         
         return  self::where($where)
         ->where(function($query) use ($keyword){
-            $query->where('name', 'like', "%{$keyword}%")
-            ->orWhere('author', 'like', "%{$keyword}%");
+            $query->where('name', '=', "{$keyword}")
+            ->orWhere('author', '=', "{$keyword}");
         })
         ->orderBy($order[0], $order[1])
         ->paginate($pageNums);
