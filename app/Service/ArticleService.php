@@ -197,7 +197,7 @@ class ArticleService extends BaseService
     public function deleteRepeat()
     {
         
-        $hashTableArr = range(1, 30);
+        $hashTableArr = range(0, 29);
         
         foreach ($hashTableArr as $hash) {
             $repeatArticles = $this->model::lsRepeat($hash);
