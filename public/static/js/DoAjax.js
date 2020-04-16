@@ -127,7 +127,7 @@ var DoAjax = new function (){
 	this.error = function()
 	{
 		this.enAbled();
-		alert('error');
+		alert('网络链接错误，请稍后再试');
 	}
 	
 }
