@@ -15,15 +15,18 @@
 if ( App::environment('local') ){
     $wwwSite = 'www.novel.local';
     $mobileSite = 'm.novel.local';
+    $defaultSite = '*.novel.local';
 }
 
 if ( App::environment('production') ){
     $wwwSite = 'www.666kanshu.com';
     $mobileSite = 'm.666kanshu.com';
+    $defaultSite = '*.666kanshu.com';
 }
 
+
 Route::domain($wwwSite)->namespace('www')->group(function(){
-   
+    
     Route::get('/', 'HomeController@index')->name('www');
     
     Route::get('categories/{idcode}', 'CategoryController@index')->name('category');
@@ -83,6 +86,35 @@ Route::domain($mobileSite)->namespace('mobile')->group(function(){
         return response()->view('mobile/global/404', [], 404);
     });
 });
+
+    
+Route::domain($defaultSite)->namespace('www')->group(function(){
+    
+    Route::get('/', 'HomeController@index')->name('www');
+    
+    Route::get('categories/{idcode}', 'CategoryController@index')->name('category');
+    
+    Route::get('books/finished', 'BookController@finished')->name('finished');
+    
+    Route::get('books/rankingList', 'BookController@rankingList')->name('rankingList');
+    
+    Route::get('books/search', 'BookController@search')->name('search');
+    
+    Route::get('books/{idcode}', 'BookController@index')->name('book');
+    
+    Route::post('books/actionRecommend', 'BookController@actionRecommend')->name('recommend');
+    
+    Route::get('articles/{idcode}/book/{book_idcode}', 'ArticleController@index')->name('article');
+    
+    Route::get('users/myBookrack', 'UserController@myBookrack')->name('bookrack');
+    
+    Route::post('users/actionSetBookrack', 'UserController@actionSetBookrack')->name('setBookrack');
+    
+    Route::fallback(function () {
+        return response()->view('www/global/404', ['categories' => App\Model\Category::ls(true)], 404);
+    });
+});
+
 
 Route::fallback(function () {
     return response()->redirectTo(env('APP_URL'));
